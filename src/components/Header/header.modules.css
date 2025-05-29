@@ -1,0 +1,84 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  background-color: rgba(26, 27, 32, 0.965); 
+}
+
+.logo{
+  width: 81px;
+  height: 75px;
+}
+
+.botoes-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 25vw;
+  gap: 10%;
+}
+
+.login{
+  display: flex;
+  color:white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.125rem;
+}
+
+.cadastro{
+  display: flex;
+  color:white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.125rem;
+}
+
+.agende{
+  display: flex;
+  color:white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.125rem;
+}
+
+.login:hover, .cadastro:hover, .agende:hover{
+  color:#f5d105;
+  transition: 0.5s;
+}
+
+
+@media(max-width: 1200px){
+  header{
+    height: 10vh;
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    padding: 0;
+  }
+  .botoes-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  gap: 8%;
+  }
+.login, .cadastro,.agende{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    height: 5vh;
+    font-size: 1rem;
+    border: 1px solid white;
+    padding: 6px;
+    border-radius: 7px;
+  }
+.logo{
+  display: none;
+}
+
+}
+

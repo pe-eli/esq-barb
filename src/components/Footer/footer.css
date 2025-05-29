@@ -1,0 +1,50 @@
+.footer{
+    color: black;
+    height: 230px;
+    gap: 10%;
+    display: flex;
+    justify-content: center;
+    border:0;
+    margin:0;
+    padding: 0;
+    background-color: #f5d105ca; 
+    font-weight: bold;
+}
+
+.barb-esquadrao{
+    width: 300px;
+    font-weight: bold;
+ 
+}
+
+.redes-sociais{
+    display: flex;
+    flex-direction: column;
+}
+
+.separar-redes{
+    width: 134px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.texto-footer{
+    font-size: 1rem;
+}
+
+@media(max-width: 1200px){
+    .footer{   
+    height: 70vh; 
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    }
+    .barb-esquadrao{
+    width: 100vw;
+}
+
+}
