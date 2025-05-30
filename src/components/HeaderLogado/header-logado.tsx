@@ -1,16 +1,30 @@
+import { useState } from "react";
+import './logado.modules.css';
+import SideMenu from '../SideMenu/sidemenu';
 
-import './logado.modules.css'
+function HeaderLogado() {
+  const [menuAberto, setMenuAberto] = useState(false);
 
-function HeaderLogado(){
-    return(
-        <>
-            <header>   
-                <img className="logo" src="./public/Header/logo.png" alt="Logo da barbearia" />
-                <a href="#"><img  className='perfil'src="/Header/perfil.png" alt="" /></a>
-            </header>
-            </>
-             )
-                    }
+  const toggleMenu = () => {
+    setMenuAberto(!menuAberto);
+  };
 
-export default HeaderLogado
+  return (
+    <>
+      <header className="header">
+        <img className="logo" src="/Header/logo.png" alt="Logo da barbearia" />
 
+        <button
+          className="perfil-button"
+          onClick={toggleMenu}
+        >
+          <img className="perfil" src="/Header/perfil.png" alt="Ícone do perfil" />
+        </button>
+      </header>
+
+      {menuAberto && <SideMenu onClose={() => setMenuAberto(false)} />}
+    </>
+  );
+}
+
+export default HeaderLogado;
