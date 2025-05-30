@@ -23,7 +23,7 @@ body {
   position: relative;
 }
 
-.background-image {
+.foto-de-fundo{
   position: fixed;
   top: 0;
   left: 0;
@@ -97,7 +97,7 @@ body {
         text-align: center;
 }
 
-@media(max-width: 1200px){
+@media(max-width: 700px){
   .slogan{
     display: flex;
     font-size: 1.2rem;
@@ -122,11 +122,11 @@ body {
 /* -----------------------------------------SOBRE, FOTO DO BRUNO E TEXTO---------------------------------- */
 
 .about-section {
-  min-height: 90vh;
-  background-color: rgba(26, 27, 32, 0.95);
-  color: #ffffff;
+  min-height: 90vh; 
+  color: black;
   display: flex;
   gap: 7%;
+  background-color: rgba(255, 255, 255, 0.875);
   justify-content: center;
   text-align: center;
 }
@@ -166,9 +166,10 @@ body {
 
 @media(max-width: 1300px){  
   .about-section{
+    display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    min-height: 80vh;
   }
 
   .apresentacao{
@@ -196,9 +197,10 @@ body {
 /* -----------------------------------------SEÇÃO ESPAÇO, CONHEÇA NOSSO SALÃO E BLÁ BLÁ BLÁ---------------------------------- */
 
 .espaco-section {
+
   min-height: 100vh;
-  background-color: rgba(255, 255, 255, 0.875);
-  color: #000000;
+  background-color: rgba(26, 27, 32, 0.95);
+  color: #fff;
   display: flex; 
 }
 
@@ -272,7 +274,7 @@ body {
 @media(max-width:1200px){
     .espaco-section{
         display: flex;
-        height: 180vh;
+        height: 190vh;
     }
     .sobre-barbearia{
     display: flex;
@@ -296,22 +298,32 @@ body {
     --dist-sobre: 10%;
 }
 
+@media screen and (max-width:400px){
+  .espaco-section{
+        display: flex;
+        height: 200vh;
+    }
+}
+/* -----------------------------------------SEÇÃO GOOGLE MAPS, ONDE ESTAMOS---------------------------------- */
+
 .local-section {
     min-height: 100vh;
-    background-color: rgba(26, 27, 32, 0.95);
-    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.875);
+    color: #000;
     display: flex;
     gap: 10%;
     justify-content: center;
+    align-items: center;
 }
 
 .span{
-    color: #f5d105;
+    color: #000;
     font-size: 20px;
     font-weight: bold;
 }
+
 .onde-estamos{
-    margin-top: var(--dist-sobre);
+    margin-top: 2.8%;
 }
 
 .mapa{
@@ -322,7 +334,26 @@ body {
 }
 
 @media(max-width:1200px){
+
+  .background-image{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/Home/background-barbearia.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  z-index: -1; 
+}
+.foto-de-fundo{
+  display: none;
+}
+
   .onde-estamos{
+    color: #000;
     margin-top: 0;
     margin-bottom: 10%;
 }
@@ -331,8 +362,8 @@ body {
     height: 40vh;
   }
   .local-section {
+    background-color: rgba(255, 255, 255, 0.875);
     min-height: 120vh;
-    background-color: rgba(26, 27, 32, 0.95);
     color: #ffffff;
     display: flex;
     flex-direction: column;

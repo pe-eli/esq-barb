@@ -5,6 +5,7 @@ import './home.modules.css';
 function Home() {
   return (
     <>
+    <img className="foto-de-fundo" src="/Home/background-barbearia.jpg" alt="" />
       <Header />
       <section className='esticar-home'>
         <div className="centralize">
