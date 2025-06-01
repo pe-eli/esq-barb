@@ -30,14 +30,14 @@ const SideMenu: React.FC<Props> = ({ onClose }) => {
     <div className="side-menu">
       <div className="side-menu-header">
         <span>Menu</span>
-        <button onClick={onClose}>✕</button>
+        <button className="buttonfechar"onClick={onClose}>✕</button>
       </div>
 
       <div className="side-menu-content">
         <div className="user-box">
           <div className="user-avatar">{getInitials()}</div>
           <div>
-            <p className="user-name">{user?.email || "Usuário"}</p>
+            <p className="user-name">{user?.displayName || "Usuário"}</p>
             <span className="user-role">Cliente</span>
           </div>
         </div>

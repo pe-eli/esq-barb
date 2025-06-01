@@ -4,6 +4,7 @@ import { auth } from "../../firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import "./login.css";
 
@@ -11,17 +12,30 @@ const Login: React.FC = () => {
   const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState(""); // campo novo
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!name.trim()) {
+      setMessage("Por favor, insira um nome.");
+      return;
+    }
+
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+      // Atualiza o displayName do usuário
+      await updateProfile(userCredential.user, {
+        displayName: name,
+      });
+
       setMessage("Usuário registrado com sucesso!");
       setEmail("");
       setPassword("");
+      setName("");
       setIsRegistering(false);
     } catch (error: any) {
       setMessage(error.message);
@@ -50,6 +64,19 @@ const Login: React.FC = () => {
         <h2 className="login-title">
           {isRegistering ? "Registrar" : "Login"}
         </h2>
+
+        {isRegistering && (
+          <>
+            <label htmlFor="name">Nome</label>
+            <input
+              type="text"
+              id="name"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </>
+        )}
 
         <label htmlFor="email">Email</label>
         <input

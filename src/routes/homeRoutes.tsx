@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "../pages/Home/home";
 import Login from "../pages/Login/login";
 import Agende from "../pages/Agende/agende";
+import MeuPerfil from "../pages/Meuperfil/meuperfil"; // ⬅️ import novo
 import PrivateRoute from "./PrivateRoute";
 import { useAuth } from "../context/AuthContext";
 
@@ -36,8 +37,16 @@ function AppRoutes() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/perfil"
+          element={
+            <PrivateRoute>
+              <MeuPerfil />
+            </PrivateRoute>
+          }
+        />
 
-        {/* Rota fallback: qualquer rota inválida redireciona para / */}
+        {/* Rota fallback */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

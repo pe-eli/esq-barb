@@ -218,6 +218,7 @@ body {
     font-weight: bold;
     font-size: 1.25rem;
     text-align: center;
+    color:white;
 
 }
 
@@ -261,6 +262,7 @@ body {
     text-align: center;
     font-size: 0.9375rem;
     width: 180px;
+    color: white;
 }
 
 .cjt-icone-texto{
@@ -320,6 +322,9 @@ body {
     color: #000;
     font-size: 20px;
     font-weight: bold;
+}
+.tituloBranco {
+  color: white;
 }
 
 .onde-estamos{

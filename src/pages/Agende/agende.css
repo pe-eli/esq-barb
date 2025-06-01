@@ -275,3 +275,44 @@ h2, p {
 .texto-destaque {
   color: white;
 }
+.confirmacao-sucesso {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.confirmacao-sucesso h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.confirmacao-sucesso p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.confirmacao-sucesso .botoes-navegacao {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.confirmacao-sucesso button {
+  background-color: #111;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.confirmacao-sucesso button:hover {
+  background-color: #333;
+}

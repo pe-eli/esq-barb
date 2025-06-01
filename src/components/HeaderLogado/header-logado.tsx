@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom"; // importe o Link
 import './logado.modules.css';
 import SideMenu from '../SideMenu/sidemenu';
 
@@ -12,7 +13,10 @@ function HeaderLogado() {
   return (
     <>
       <header className="header">
-        <img className="logo" src="/Header/logo.png" alt="Logo da barbearia" />
+        {/* Link para a página home */}
+        <Link to="/home">
+          <img className="logo" src="/Header/logo.png" alt="Logo da barbearia" />
+        </Link>
 
         <button
           className="perfil-button"
