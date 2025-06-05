@@ -51,29 +51,36 @@ header {
 
 @media(max-width: 1200px){
   header{
-    height: 10vh;
-    display: flex;
-    width: 100vw;
-    justify-content: space-between;
     padding: 0;
+    height: 10dvh;
+    display: flex;
+    width: 75dvw;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
   }
   .botoes-header{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  gap: 8%;
+  width: 75dvw;
+  gap: 6%;
   }
-.login, .cadastro,.agende{
+
+.cadastro{
+  display: none;
+}
+.login,.agende{
+    margin-right: 10%;
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
-    width: 20vw;
-    height: 5vh;
-    font-size: 1rem;
+    width: 30dvw;
+    height: 5dvh;
+    font-size: 0.7rem;
     border: 1px solid white;
-    padding: 6px;
+    padding: 4px;
     border-radius: 7px;
   }
 .logo{

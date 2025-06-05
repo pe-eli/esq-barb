@@ -137,3 +137,7 @@ header {
 .sair {
   color: #d32f2f;
 }
+
+@media(max-width: 1200px){
+
+}

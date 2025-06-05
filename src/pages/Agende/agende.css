@@ -46,28 +46,6 @@ h2, p {
   z-index: 2;
 }
 
-.linha-fundo,
-.linha-progresso {
-  position: absolute;
-  top: 50%;
-  height: 4px;
-  border-radius: 2px;
-  transform: translateY(-50%);
-}
-
-.linha-fundo {
-  left: 0;
-  right: 0;
-  background: #ccc;
-  z-index: 1;
-}
-
-.linha-progresso {
-  left: 0;
-  background: var(--amarelo);
-  z-index: 2;
-  transition: width 0.4s ease;
-}
 
 .passo {
   display: flex;
@@ -205,14 +183,14 @@ h2, p {
 }
 
 .botoes-navegacao {
-  width: fit-content; /* ou algo como 200px, se quiser fixo */
-  margin: 2rem auto 0 auto; /* centraliza horizontalmente */
+  width: fit-content;
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
 
 .botoes-navegacao button {
+  margin: 2rem auto 0 auto;
   display: flex;
   justify-content: center;
   background: var(--amarelo);
@@ -231,45 +209,9 @@ h2, p {
   transform: translateY(-2px);
 }
 
-.botao-voltar-topo {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background-color: #fcd500;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 999px;
-  font-size: 1rem;
-  display: inline-flex; /* ✅ mantém tamanho do conteúdo */
-  align-items: center;
-  color: #000;
-  font-weight: 600;
-  cursor: pointer;
-  gap: 0.5rem;
-  z-index: 10;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.2s ease;
-  width: auto; /* ✅ garante que só use o espaço necessário */
-  max-width: 90%; /* ✅ evita que cresça demais */
-}
-
-
-
-.botao-voltar-topo:hover {
-  background-color: #e0be00;
-}
 
 .texto-branco {
   color: white;
-}
-
-.botao-voltar-topo:hover {
-  color: var(--amarelo);
-}
-
-.botao-voltar-topo svg {
-  width: 20px;
-  height: 20px;
 }
 
 .texto-destaque {
@@ -315,4 +257,57 @@ h2, p {
 
 .confirmacao-sucesso button:hover {
   background-color: #333;
+}
+
+
+@media(max-width:1200px){
+  .fundo{
+    display: none;
+  }
+  .passos{
+    font-size: 0.8rem;
+    justify-content: space-between;
+    width: 75dvw;
+    margin-bottom: 3%;
+  }
+
+  .selecao {
+  font-size: 0.7rem;
+  width: 67dvw;
+  display: flex;
+  flex-direction: column;
+  background: #dbdbdb;
+  border-radius: 12px;
+  padding: 0.8rem;
+  margin-bottom: 3rem;
+}
+
+.card-servico {
+  width: 50dvw;
+  border: 1px solid #f5d105;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  color: #333;
+}
+
+.botoes-navegacao button {
+  margin: 1rem auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--amarelo);
+  color: black;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+
 }
