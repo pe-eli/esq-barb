@@ -3,11 +3,12 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
+  background-image: url('/public/Agende/fundo.png');
+  
 }
 
 .login-form {
-  background: white;
+  background-color: #242424;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -21,13 +22,13 @@
   text-align: center;
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
-  color: #333;
+  color: white;
 }
 
 .login-form label {
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: #444;
+  color: white;
 }
 
 .login-form input {
@@ -40,13 +41,15 @@
 
 .login-form button {
   padding: 0.75rem;
-  background-color: #007bff;
+  background-color: #f5d105 ;
   color: white;
   font-weight: bold;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  color: black;
+  text-align: center;
 }
 
 .login-form button:hover {
@@ -72,3 +75,4 @@
   font-size: 0.9rem;
   color: green;
 }
+
