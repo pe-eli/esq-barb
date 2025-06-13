@@ -113,8 +113,8 @@ const Agendamento: React.FC = () => {
 
         {/* Etapa 1 - Serviço */}
         {etapaAtual === 1 && (
-          <div className="selecao">
-            <h2>Escolha um Serviço</h2>
+          <div className="selecao-servico">
+            <h2>Escolha o serviço:</h2>
             <div className="servicos-grid">
               {servicos.map((s, idx) => (
                 <div
@@ -130,7 +130,7 @@ const Agendamento: React.FC = () => {
             </div>
             {servicoSelecionado !== null && (
               <div className="botoes-navegacao">
-                <button onClick={prosseguir}>Prosseguir</button>
+                <button onClick={prosseguir}>Prosseguir ⟶</button>
               </div>
             )}
           </div>
@@ -138,7 +138,7 @@ const Agendamento: React.FC = () => {
 
        {etapaAtual === 2 && (
   <div className="selecao">
-    <h2>Escolha a Data</h2>
+    <h2>Clique na data desejada:</h2>
     <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center" }}>
       <DatePicker
         className="calendario"
@@ -151,17 +151,15 @@ const Agendamento: React.FC = () => {
       />
     </div>
     <div className="botoes-navegacao">
-      <button onClick={voltar}>Voltar</button>
-      {dataSelecionada && <button onClick={prosseguir}>Prosseguir</button>}
+      <button onClick={voltar}>⟵ Voltar</button>
+      {dataSelecionada && <button onClick={prosseguir}>Prosseguir ⟶</button>}
     </div>
   </div>
 )}
 
-
-
         {etapaAtual === 3 && (
   <div className="selecao">
-    <h2>Escolha o Horário</h2>
+    <h2>Escolha o horário desejado:</h2>
     <div className="datas-grid">
       {horarios.map((horario, idx) => (
         <div
@@ -176,12 +174,9 @@ const Agendamento: React.FC = () => {
     {horarioSelecionado && (
       <div className="botoes-navegacao">
         <button onClick={voltar}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width={20} height={20} style={{ marginRight: 6 }}>
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Voltar
+          ⟵ Voltar
         </button>
-        <button onClick={prosseguir}>Prosseguir</button>
+        <button onClick={prosseguir}>Prosseguir ⟶</button>
       </div>
     )}
   </div>
@@ -193,42 +188,33 @@ const Agendamento: React.FC = () => {
     {!agendamentoConfirmado ? (
       <>
         <h2>Confirme seu Agendamento</h2>
-        <div style={{
-          textAlign: "left",
-          background: "#fff",
-          padding: "1.5rem",
-          borderRadius: "12px",
-          marginTop: "1rem"
-        }}>
+        <div className="confirme">
           <p><strong>Serviço:</strong> {servicoSelecionado !== null ? servicos[servicoSelecionado].nome : ""}</p>
           <p><strong>Data:</strong> {dataSelecionada ? format(dataSelecionada, "dd/MM/yyyy") : ""}</p>
           <p><strong>Horário:</strong> {horarioSelecionado}</p>
         </div>
         <div className="botoes-navegacao" style={{ marginTop: "1.5rem" }}>
           <button onClick={voltar} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width={20} height={20}>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Voltar
+            ⟵ Voltar
           </button>
           <button onClick={confirmarAgendamento}>
-            Confirmar Agendamento
+            Confirmar Agendamento ✔
           </button>
         </div>
       </>
     ) : (
-      <div className="confirmacao-sucesso">
+      <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <h2>Agendamento Confirmado com Sucesso!</h2>
-        <p>Seu corte foi agendado. Você pode acessar seu perfil ou voltar para a página inicial.</p>
+        <p style={{fontSize: window.innerWidth < 1200 ? '1rem' : '1rem',}}>
+          Seu corte foi agendado. Você pode acessar seu perfil ou voltar para a página inicial.</p>
         <div className="botoes-navegacao">
-          <button onClick={() => navigate("/perfil")}>Ir para Meu Perfil</button>
-          <button onClick={() => navigate("/")}>Ir para Home</button>
+          <button className="confirmacao-sucesso" onClick={() => navigate("/perfil")}>Ir para Meu Perfil</button>
+          <button className="confirmacao-sucesso" onClick={() => navigate("/")}>Ir para Home</button>
         </div>
       </div>
     )}
   </div>
 )}
-
       </div>
     </>
   );

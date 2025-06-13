@@ -83,7 +83,18 @@ h2, p {
   color: black;
 }
 
-.selecao {
+.selecao-servico {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centraliza título e botão, mas respeita o grid */
+  gap: 20px;
+  padding: 20px;
+  background: #dbdbdb;
+  margin-top: 1rem;
+  border-radius: 1.5rem;
+}
+
+.selecao, .selecao-horario {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,6 +104,9 @@ h2, p {
   box-shadow: 0px 8px 24px;
   animation: fadeInUp 0.5s ease;
   position: relative;
+  margin-top: 1rem;
+  text-align: center;
+  align-items: center;
 }
 
 @keyframes fadeInUp {
@@ -108,9 +122,10 @@ h2, p {
 
 .servicos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
+  grid-template-columns: repeat(2, 1fr); /* ou use auto-fit com minmax */
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
 }
 
 .card-servico {
@@ -183,13 +198,16 @@ h2, p {
 }
 
 .botoes-navegacao {
+  margin-top: 1rem;
   width: fit-content;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 4rem;
+
 }
 
 .botoes-navegacao button {
+  width: 200px;
   margin: 2rem auto 0 auto;
   display: flex;
   justify-content: center;
@@ -203,6 +221,7 @@ h2, p {
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
 }
 
 .botoes-navegacao button:hover {
@@ -224,6 +243,9 @@ h2, p {
   text-align: center;
   margin-top: 2rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .confirmacao-sucesso h2 {
@@ -235,7 +257,7 @@ h2, p {
 .confirmacao-sucesso p {
   font-size: 1rem;
   color: #555;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .confirmacao-sucesso .botoes-navegacao {
@@ -259,8 +281,21 @@ h2, p {
   background-color: #333;
 }
 
+.confirme{
+  text-align: left;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 1rem;
 
+}
 @media(max-width:1200px){
+  .agendamento-container{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    align-items: center;
+  }
   .fundo{
     display: none;
   }
@@ -278,11 +313,17 @@ h2, p {
   flex-direction: column;
   background: #dbdbdb;
   border-radius: 12px;
-  padding: 0.8rem;
+  padding: 1.5rem;
   margin-bottom: 3rem;
 }
 
+.servicos-grid{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .card-servico {
+  padding: 0;
   width: 50dvw;
   border: 1px solid #f5d105;
   border-radius: 12px;
@@ -292,22 +333,34 @@ h2, p {
   color: #333;
 }
 
-.botoes-navegacao button {
-  margin: 1rem auto 0 auto;
+.botoes-navegacao{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--amarelo);
-  color: black;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  border-radius: 30px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  flex-direction: column;
+  gap: 0;
 }
 
+.datas-grid {
+  font-size: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start; /* ou center, se quiser centralizado */
+}
 
+.data-item {
+  width: calc(50% - 10px); /* 3 por linha, ajustável */
+  min-width: 100px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+}
+.confirme{
+  font-size: 1rem;
+  justify-content: center;
+  text-align: center;
+}
 
 }
