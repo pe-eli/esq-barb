@@ -1,0 +1,186 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  background-color: rgba(26, 27, 32, 0.965); 
+}
+
+.logo{
+  width: 81px;
+  height: 75px;
+}
+
+.perfil-button {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  position: left;
+  top: 10px;
+  right: 10px;
+}
+
+.perfil {
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+
+}
+
+/* Menu lateral */
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.fechar-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #999;
+  cursor: pointer;
+}
+
+.usuario-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.usuario-nome {
+  font-size: 1rem;
+  color: #222;
+}
+
+.cargo {
+  font-size: 0.75rem;
+  background: #e0f0ff;
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: #2575fc;
+  margin-top: 4px;
+}
+
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.menu-section button {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.menu-section button:hover {
+  background: #f3f4f6;
+}
+
+.sair {
+  color: #d32f2f;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.agende-button {
+  background-color: #e0b97d;
+  color: #000;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 20px; /* espaço à direita */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* animações suaves */
+}
+
+.agende-button:hover {
+  background-color: #cfa45e;
+  transform: translateY(-2px); /* leve "subida" no hover */
+}
+
+.agende-button:hover {
+  background-color: #cfa45e;
+  
+
+}
+
+.perfil-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.perfil {
+  width: 32px;
+  height: 32px;
+}
+

@@ -1,0 +1,36 @@
+.perfil-container {
+  min-height: 60vh;
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #111;
+  color: white;
+}
+
+.perfil-titulo {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.perfil-info {
+  background-color: #1c1c1c;
+  padding: 30px;
+  border-radius: 20px;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+}
+
+.perfil-info p {
+  margin: 15px 0;
+  color: #ddd;
+}
+
+.perfil-info strong {
+  color: #ffffff;
+}
+
+.perfil-loading {
+  color: #aaa;
+  font-size: 1.1rem;
+}
