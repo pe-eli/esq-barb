@@ -14,8 +14,6 @@ ul{
   width: 100vw;
   height: 100vh;
   background-image: url('/Agende/fundo.png');
-  background-image: url('./Agende/fundo.png');
-  background-image: url('../public/Agende/fundo.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
