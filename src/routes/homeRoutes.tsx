@@ -5,6 +5,8 @@ import Agende from "../pages/Agende/agende";
 import MeuPerfil from "../pages/Meuperfil/meuperfil"; // ⬅️ import novo
 import PrivateRoute from "./PrivateRoute";
 import { useAuth } from "../context/AuthContext";
+import GerenciarServicos from "../pages/GerenciarServicos/GerenciarServicos";
+
 
 function AppRoutes() {
   const { user } = useAuth();
@@ -38,10 +40,26 @@ function AppRoutes() {
           }
         />
         <Route
+          path="/servicos"
+          element={
+            <PrivateRoute>
+              <GerenciarServicos />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/perfil"
           element={
             <PrivateRoute>
               <MeuPerfil />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Home />
             </PrivateRoute>
           }
         />

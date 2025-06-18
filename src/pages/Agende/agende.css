@@ -2,19 +2,25 @@
   --amarelo: #f5d105;
 }
 
-.fundo {
-  background-image: url('/public/Agende/fundo.png');
+ul{
+  list-style: none;
+  padding: 0;
+}
+
+ .fundo {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('Agende/fundo.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.2;
   z-index: -1;
 }
+
 
 .agendamento-container {
   max-width: 800px;
@@ -29,8 +35,12 @@ h1 {
   color: var(--amarelo);
 }
 
-h2, p {
-  color: #333;
+p{
+color: #333;
+}
+h2{
+  color: #333; 
+  margin-top: 2rem; 
 }
 
 .passos-container {
@@ -46,6 +56,28 @@ h2, p {
   z-index: 2;
 }
 
+.linha-fundo,
+.linha-progresso {
+  position: absolute;
+  top: 50%;
+  height: 4px;
+  border-radius: 2px;
+  transform: translateY(-50%);
+}
+
+.linha-fundo {
+  left: 0;
+  right: 0;
+  background: #ccc;
+  z-index: 1;
+}
+
+.linha-progresso {
+  left: 0;
+  background: var(--amarelo);
+  z-index: 2;
+  transition: width 0.4s ease;
+}
 
 .passo {
   display: flex;
@@ -83,18 +115,8 @@ h2, p {
   color: black;
 }
 
-.selecao-servico {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* centraliza título e botão, mas respeita o grid */
-  gap: 20px;
-  padding: 20px;
-  background: #dbdbdb;
-  margin-top: 1rem;
-  border-radius: 1.5rem;
-}
-
-.selecao, .selecao-horario {
+.selecao {
+  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -104,9 +126,6 @@ h2, p {
   box-shadow: 0px 8px 24px;
   animation: fadeInUp 0.5s ease;
   position: relative;
-  margin-top: 1rem;
-  text-align: center;
-  align-items: center;
 }
 
 @keyframes fadeInUp {
@@ -122,10 +141,9 @@ h2, p {
 
 .servicos-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* ou use auto-fit com minmax */
-  gap: 20px;
-  width: 100%;
-  max-width: 800px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
 .card-servico {
@@ -196,171 +214,80 @@ h2, p {
   background: #fffbe6;
   box-shadow: 0 0 10px var(--amarelo);
 }
-
-.botoes-navegacao {
-  margin-top: 1rem;
+ 
+.botoes-navegacao{
   width: fit-content;
-  display: flex;
-  justify-content: center;
-  gap: 4rem;
-
-}
-
-.botoes-navegacao button {
-  width: 200px;
-  margin: 2rem auto 0 auto;
   display: flex;
   justify-content: center;
   background: var(--amarelo);
   color: black;
   border: none;
-  padding: 0.75rem 2rem;
+  padding: 0.5rem 2rem;
+  margin: 2rem auto 0 auto;
   font-size: 1rem;
   border-radius: 30px;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  text-align: center;
 }
 
 .botoes-navegacao button:hover {
   transform: translateY(-2px);
 }
 
+.botao-voltar-topo {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: #fcd500;
+  border: none;
+  padding: 6px 20px;
+  border-radius: 999px;
+  font-size: 1rem;
+  display: inline-flex; /* ✅ mantém tamanho do conteúdo */
+  align-items: center;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  gap: 0.5rem;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+  width: auto; /* ✅ garante que só use o espaço necessário */
+  max-width: 90%; /* ✅ evita que cresça demais */
+}
 
+.botao-voltar-topo svg {
+  width: 20px;
+  height: 20px;
+}
 .texto-branco {
   color: white;
 }
-
 .texto-destaque {
   color: white;
 }
-.confirmacao-sucesso {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
-  margin-top: 2rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
 
-.confirmacao-sucesso h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.confirmacao-sucesso p {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 1rem;
-}
-
-.confirmacao-sucesso .botoes-navegacao {
+.confirmacao-sucesso{
   display: flex;
   gap: 1rem;
   justify-content: center;
 }
 
-.confirmacao-sucesso button {
-  background-color: #111;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
 .confirmacao-sucesso button:hover {
   background-color: #333;
 }
-
-.confirme{
-  text-align: left;
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  margin-top: 1rem;
-
-}
-@media(max-width:1200px){
-  .agendamento-container{
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    align-items: center;
-  }
-  .fundo{
-    display: none;
-  }
-  .passos{
-    font-size: 0.8rem;
-    justify-content: space-between;
-    width: 75dvw;
-    margin-bottom: 3%;
-  }
-
-  .selecao {
-  font-size: 0.7rem;
-  width: 67dvw;
-  display: flex;
-  flex-direction: column;
-  background: #dbdbdb;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.servicos-grid{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .card-servico {
-  padding: 0;
-  width: 50dvw;
-  border: 1px solid #f5d105;
-  border-radius: 12px;
-  background: #fff;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-  text-align: center;
-  color: #333;
+  background-color: #fff;
+  color: #000;
 }
 
-.botoes-navegacao{
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
+@media(max-width:1200px){
 .datas-grid {
-  font-size: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start; /* ou center, se quiser centralizado */
-}
-
-.data-item {
-  width: calc(50% - 10px); /* 3 por linha, ajustável */
-  min-width: 100px;
-  background-color: white;
-  padding: 10px;
-  border-radius: 8px;
-  box-sizing: border-box;
-  text-align: center;
-  cursor: pointer;
-}
-.confirme{
-  font-size: 1rem;
-  justify-content: center;
-  text-align: center;
-}
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
 
 }

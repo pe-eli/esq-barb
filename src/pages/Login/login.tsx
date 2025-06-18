@@ -78,7 +78,7 @@ const Login: React.FC = () => {
           </>
         )}
 
-        <label htmlFor="email" className="email">E-mail</label>
+        <label htmlFor="email">Email</label>
         <input
           type="email"
           id="email"
@@ -87,7 +87,7 @@ const Login: React.FC = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <label htmlFor="password" className="password">Senha</label>
+        <label htmlFor="password">Senha</label>
         <input
           type="password"
           id="password"
@@ -109,7 +109,6 @@ const Login: React.FC = () => {
               setIsRegistering(!isRegistering);
               setMessage("");
             }}
-            style={{ color: "#f5d105", cursor: "pointer", fontWeight: 700}}
           >
             {isRegistering ? "Faça login" : "Registre-se"}
           </span>

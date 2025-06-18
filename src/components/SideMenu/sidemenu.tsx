@@ -26,11 +26,15 @@ const SideMenu: React.FC<Props> = ({ onClose }) => {
     return 'US'; // Fallback
   };
 
+  // Verifica se é admin pelo email
+  const isAdmin = user?.email === 'mp6171745@gmail.com' || 'p.mouuraa05@gmail.com'; 
+  
+
   return (
     <div className="side-menu">
       <div className="side-menu-header">
         <span>Menu</span>
-        <button className="buttonfechar"onClick={onClose}>✕</button>
+        <button className="buttonfechar" onClick={onClose}>✕</button>
       </div>
 
       <div className="side-menu-content">
@@ -38,22 +42,30 @@ const SideMenu: React.FC<Props> = ({ onClose }) => {
           <div className="user-avatar">{getInitials()}</div>
           <div>
             <p className="user-name">{user?.displayName || "Usuário"}</p>
-            <span className="user-role">Cliente</span>
+            <span className="user-role">{isAdmin ? 'Administrador' : 'Cliente'}</span>
+
           </div>
         </div>
 
         <div className="section">
           <p className="section-title">Principal</p>
-          <button onClick={() => navigate('/')}>🏠 Home</button>
-          <button onClick={() => navigate('/agendamento')}>🧍‍♂️ Novo Agendamento</button>
+          <button className="botao-side" onClick={() => navigate('/')}>Home</button>
+          <button className="botao-side" onClick={() => navigate('/agendamento')}>Novo agendamento</button>
         </div>
+
+        {isAdmin && (
+          <div className="section">
+            <p className="section-title">Admin</p>
+            <button className="botao-side" onClick={() => navigate('/dashboard')}>Dashboard</button>
+            <button className="botao-side" onClick={() => navigate('/admin/usuarios')}>Gerenciar usuários</button>
+            <button className="botao-side" onClick={() => navigate('/servicos')}>Gerenciar serviços</button>
+          </div>
+        )}
 
         <div className="section">
           <p className="section-title">Minha Conta</p>
-          <button onClick={() => navigate('/perfil')}>👤 Meu Perfil</button>
-          <button onClick={() => navigate('/futuros')}>🗓️ Agendamentos Futuros</button>
-          <button onClick={() => navigate('/historico')}>📚 Histórico</button>
-          <button className="logout-button" onClick={handleLogout}>🚪 Sair</button>
+          <button className="botao-side" onClick={() => navigate('/perfil')}>Meu perfil</button>
+          <button className="logout-button" onClick={handleLogout}>Sair</button>
         </div>
       </div>
     </div>

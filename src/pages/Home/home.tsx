@@ -11,12 +11,13 @@ function Home() {
 
   return (
     <>
-      <img className="foto-de-fundo" src="/Home/background-barbearia.jpg" alt="" />
+      
       {user ? <HeaderLogado /> : <Header />}
 
-      <section className='esticar-home'>
+    <section className="esticar-home">
+        <div className="bg-overlay" />
         <div className="centralize">
-          <img className="title" src="/Home/nome.png" alt="Esquadrão Barbearia" />
+          <img className="title" src="./public/Home/nome.png" alt="Esquadrão Barbearia" />
           <h3 className="slogan">Cabelo na régua, confiança no topo.</h3>
           <button className="button-cnt">Conheça nosso trabalho</button>
         </div>
@@ -30,7 +31,7 @@ function Home() {
           </p>
         </div>
         <figure className='picture'>
-          <img className='foto-bruno' src="/Sobre/bruno.webp" alt="Bruno Estevam, fundador da barbearia." />
+          <img className='foto-bruno' src="./public/Sobre/bruno.webp" alt="Bruno Estevam, fundador da barbearia." />
           <figcaption className='figcaption'>Bruno Estevam, fundador da Esquadrão Barbearia.</figcaption>
         </figure>
       </section>
@@ -43,7 +44,7 @@ function Home() {
             <div className='cjt-icone-texto'>
               <div className='circulo'>
                 <h1 className='icone-geral'>
-                  <img className='icone' src="/Espaço/lamina-de-barbear.png" alt="" />
+                  <img className='icone' src="./public/Espaço/lamina-de-barbear.png" alt="" />
                 </h1>
               </div>
               <h2 className='descricao-icone'>Oferecemos apenas o melhor...</h2>
@@ -52,7 +53,7 @@ function Home() {
             <div className='cjt-icone-texto'>
               <div className='circulo'>
                 <h1 className='icone-geral'>
-                  <img className='icone' src="/Espaço/penteado.png" />
+                  <img className='icone' src="./public/Espaço/penteado.png" />
                 </h1>
               </div>
               <h2 className='descricao-icone'>Com anos de experiência...</h2>
@@ -61,7 +62,7 @@ function Home() {
             <div className='cjt-icone-texto'>
               <div className='circulo'>
                 <h1 className='icone-geral'>
-                  <img className='icone' src="/Espaço/barbearia.png" />
+                  <img className='icone' src="./public/Espaço/barbearia.png" />
                 </h1>
               </div>
               <h2 className='descricao-icone'>Ambiente criado para conforto...</h2>

@@ -6,9 +6,9 @@ header {
   background-color: rgba(26, 27, 32, 0.965); 
 }
 
-.logo{
-  width: 81px;
-  height: 75px;
+.logo-header{
+  width: 5rem;
+  height: 4.6rem;
 }
 
 .perfil-button {
@@ -28,10 +28,9 @@ header {
   height: 38px;
   width: 38px;
   border-radius: 50%;
-
 }
 
-/* Menu lateral */
+
 .menu-lateral {
   position: fixed;
   top: 0;
@@ -137,7 +136,83 @@ header {
 .sair {
   color: #d32f2f;
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.agende-button {
+  background-color: transparent;
+  color: #fff;
+  padding: 8px 16px;
+  border: solid 2px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 20px; /* espaço à direita */
+}
+
+.agende-button:hover{
+  border: solid 2px;
+  border-color: white;
+  transition: 0.5s;
+  background-color: white;
+  color: black;
+}
+
+.perfil-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.perfil {
+  width: 32px;
+  height: 32px;
+}
 
 @media(max-width: 1200px){
-
+  .agende-button {
+  text-align: center;
+  width: 6rem;
+  background-color: transparent;
+  color: #fff;
+  padding: 2px 2px;
+  border: solid 1px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: normal;
+  margin-right: 0.5rem; /* espaço à direita */
 }
+  .header-right{
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 1.6rem;
+  }
+  .perfil {
+  width: 40px;
+  height: 40px;
+  }
+  .logo-header {
+  width: 4rem;
+  height: 3.6rem;
+  background-image: url("/Header/logo.png");
+  background-size: contain; /* ou 'cover', depende do visual desejado */
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  background-color: transparent; /* se quiser remover fundo padrão */
+}
+}
+

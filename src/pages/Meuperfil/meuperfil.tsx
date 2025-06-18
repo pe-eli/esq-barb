@@ -54,7 +54,17 @@ const MeuPerfil: React.FC = () => {
             <ul className="historico-lista">
               {historico.map((item, idx) => (
                 <li key={idx} className="historico-item">
-                  <p><strong>Serviço:</strong> {item.servico}</p>
+                  <p>
+                    <p>
+  <strong>Serviço{Array.isArray(item.servicos) && item.servicos.length > 1 ? "s" : ""}:</strong>{" "}
+  {Array.isArray(item.servicos)
+    ? item.servicos.length > 0
+      ? item.servicos.join(", ")
+      : "Nenhum serviço"
+    : item.servicos || "Nenhum serviço"}
+</p>
+
+                  </p>
                   <p><strong>Data:</strong> {item.data}</p>
                   <p><strong>Horário:</strong> {item.horario}</p>
                 </li>
