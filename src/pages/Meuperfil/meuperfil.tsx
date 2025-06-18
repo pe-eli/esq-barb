@@ -41,13 +41,13 @@ const MeuPerfil: React.FC = () => {
         <h1>Meu Perfil</h1>
         {userInfo && (
           <div className="info-usuario">
-            <p><strong>Nome:</strong> {userInfo.nome}</p>
-            <p><strong>Email:</strong> {userInfo.email}</p>
+            <p style={{color: "white"}}><strong>Nome:</strong> {userInfo.nome}</p>
+            <p style={{color: "white"}}><strong>Email:</strong> {userInfo.email}</p>
           </div>
         )}
 
         <div className="historico-container">
-          <h2>Histórico de Cortes</h2>
+          <h2 style={{color: "#f5d105"}}>Meus serviços</h2>
           {historico.length === 0 ? (
             <p className="mensagem">Nenhum corte registrado.</p>
           ) : (
