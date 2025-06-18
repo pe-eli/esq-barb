@@ -21,14 +21,12 @@ ul{
   z-index: -1;
 }
 
-
 .agendamento-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
   font-family: "Segoe UI", sans-serif;
   text-align: center;
-
 }
 
 h1 {
@@ -38,6 +36,7 @@ h1 {
 p{
 color: #333;
 }
+
 h2{
   color: #333; 
   margin-top: 2rem; 
