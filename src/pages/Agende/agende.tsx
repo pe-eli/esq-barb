@@ -58,8 +58,6 @@ const parsePreco = (precoStr: string): number => {
 
 const Agendamento: React.FC = () => {
   const [etapaAtual, setEtapaAtual] = useState(1);
-
-  // 🆕 ESTADO PARA SERVIÇOS DINÂMICOS DO FIREBASE
   const [servicos, setServicos] = useState<any[]>([]);
   const [servicosSelecionados, setServicosSelecionados] = useState<string[]>([]);
   const [dataSelecionada, setDataSelecionada] = useState<Date | null>(null);
