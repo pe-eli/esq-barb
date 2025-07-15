@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./GerenciarServicos.css";
 import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface Servico {
   id: string;
@@ -12,9 +14,27 @@ interface Servico {
 }
 
 const GerenciarServicos: React.FC = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [servicos, setServicos] = useState<Servico[]>([]);
+  const [carregando, setCarregando] = useState(true);
+
+  const adminEmails = ['mp6171745@gmail.com', 'p.mouuraa05@gmail.com'];
+  const isAdmin = adminEmails.includes(user?.email ?? '');
 
   useEffect(() => {
+    if (!user) {
+      // Se não estiver logado, redireciona para login
+      navigate('/login');
+      return;
+    }
+
+    if (!isAdmin) {
+      // Se logado mas não for admin, redireciona para home
+      navigate('/');
+      return;
+    }
+
     const buscarServicos = async () => {
       const querySnapshot = await getDocs(collection(db, "servicosDisponiveis"));
       const lista: Servico[] = [];
@@ -29,10 +49,11 @@ const GerenciarServicos: React.FC = () => {
         });
       });
       setServicos(lista);
+      setCarregando(false);
     };
 
     buscarServicos();
-  }, []);
+  }, [user]);
 
   const alternarAtivacao = async (id: string, estadoAtual: boolean) => {
     const docRef = doc(db, "servicosDisponiveis", id);
@@ -43,9 +64,10 @@ const GerenciarServicos: React.FC = () => {
     );
   };
 
+  if (carregando) return <p>Carregando...</p>;
+
   return (
     <div className="gerenciar-servicos-container">
-        
       <h1>Gerenciar Serviços</h1>
       <div className="servicos-grid">
         {servicos.map((servico) => (

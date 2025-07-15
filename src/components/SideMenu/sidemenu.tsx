@@ -27,7 +27,9 @@ const SideMenu: React.FC<Props> = ({ onClose }) => {
   };
 
   // Verifica se é admin pelo email
-  const isAdmin = user?.email === 'mp6171745@gmail.com' || 'p.mouuraa05@gmail.com'; 
+  const adminEmails = ['mp6171745@gmail.com', 'p.mouuraa05@gmail.com'];
+const isAdmin = adminEmails.includes(user?.email ?? '');
+
   
 
   return (
