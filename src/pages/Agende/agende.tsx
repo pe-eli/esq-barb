@@ -1,317 +1,218 @@
-import React, { useState, useEffect } from "react";
-import "./agende.css";
-import HeaderLogado from "../../components/HeaderLogado/header-logado";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ptBR } from "date-fns/locale";
-import { format } from "date-fns";
+import React, { useEffect, useState } from 'react';
+import './agende.css';
+import Header from '../../components/Header/header';
+import { db } from '../../firebaseConfig';
 import {
-  getFirestore,
   collection,
-  addDoc,
-  getDocs,
   query,
-  where
-} from "firebase/firestore";
-import { auth } from "../../firebaseConfig";
-import { useNavigate } from "react-router-dom";
-
-// 🔥 SUBSTITUIR ARRAY FIXO
-// const servicos = [
-//   { nome: "Corte de Cabelo Masculino", duracao: "30 min", preco: "R$ 40,00" },
-//   { nome: "Barba", duracao: "20 min", preco: "R$ 35,00" },
-//   { nome: "Reflexo", duracao: "120 min", preco: "R$ 110,00" },
-//   { nome: "Nevou", duracao: "40 min", preco: "R$ 120,00" }
-// ];
-
-const etapas = ["Serviço", "Data", "Horário", "Confirmar"];
-
-const gerarHorarios = () => {
-  const horarios = [];
-  const agora = new Date();
-  const horaAtual = agora.getHours();
-  const minutoAtual = agora.getMinutes();
-
-  for (let h = 7; h < 18; h++) {
-    const horaStr = h.toString().padStart(2, '0');
-
-    // 00 minutos
-    if (h > horaAtual || (h === horaAtual && minutoAtual < 0)) {
-      horarios.push(`${horaStr}:00`);
-    } else if (h === horaAtual && minutoAtual < 30) {
-      // 00 só entra se ainda estiver antes de 00
-      horarios.push(`${horaStr}:00`);
-    }
-
-    // 30 minutos
-    if (h > horaAtual || (h === horaAtual && minutoAtual < 30)) {
-      horarios.push(`${horaStr}:30`);
-    }
-  }
-
-  return horarios;
-};
-
-const parsePreco = (precoStr: string): number => {
-  return parseFloat(precoStr.replace("R$ ", "").replace(",", "."));
-};
+  where,
+  getDocs,
+  addDoc,
+} from 'firebase/firestore';
 
 const Agendamento: React.FC = () => {
-  const [etapaAtual, setEtapaAtual] = useState(1);
-  const [servicos, setServicos] = useState<any[]>([]);
-  const [servicosSelecionados, setServicosSelecionados] = useState<string[]>([]);
-  const [dataSelecionada, setDataSelecionada] = useState<Date | null>(null);
-  const [horarioSelecionado, setHorarioSelecionado] = useState<string | null>(null);
-  const [agendamentoConfirmado, setAgendamentoConfirmado] = useState(false);
+  const [etapa, setEtapa] = useState(1);
+  const [servico, setServico] = useState<string[]>([]);
+  const [data, setData] = useState('');
+  const [hora, setHora] = useState('');
+  const [cpf, setCpf] = useState('');
   const [horariosOcupados, setHorariosOcupados] = useState<string[]>([]);
+  const [carregando, setCarregando] = useState(false);
 
-  const navigate = useNavigate();
-  const horarios = gerarHorarios();
+  const servicos = ['Corte Masculino', 'Corte Feminino', 'Barba', 'Sobrancelha'];
 
-  // 🆕 BUSCAR SERVIÇOS DO FIREBASE COM "ativo" === true
-  useEffect(() => {
-    const carregarServicos = async () => {
-      const db = getFirestore();
-      const servicosRef = collection(db, "servicosDisponiveis");
-      const q = query(servicosRef, where("ativo", "==", true));
-      const querySnapshot = await getDocs(q);
-      const lista = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setServicos(lista);
-    };
-    carregarServicos();
-  }, []);
+  // ✅ Gera horários dinâmicos
+const gerarHorarios = (dataSelecionada: string): string[] => {
+  const horarios: string[] = [];
+  const agora = new Date();
 
-  const toggleServico = (id: string) => {
-    setServicosSelecionados((prev) =>
-      prev.includes(id)
-        ? prev.filter((i) => i !== id)
-        : [...prev, id]
-    );
-  };
+  for (let h = 7; h < 18; h++) {
+    for (const m of [0, 30]) {
+      const horaStr = `${h.toString().padStart(2, '0')}:${m === 0 ? '00' : '30'}`;
+      const dataHoraStr = `${dataSelecionada}T${horaStr}:00`;
+      const dataHora = new Date(dataHoraStr);
 
-  const prosseguir = () => {
-    if (etapaAtual < etapas.length) {
-      setEtapaAtual(etapaAtual + 1);
+      if (dataHora.getTime() > agora.getTime()) {
+        horarios.push(horaStr);
+      }
     }
-  };
+  }
+  return horarios.sort((a, b) => {
+    const [h1, m1] = a.split(':').map(Number);
+    const [h2, m2] = b.split(':').map(Number);
+    return h1 !== h2 ? h1 - h2 : m1 - m2;
+  });
+};
+const todosHorarios = gerarHorarios(data);
 
-  const voltar = () => {
-    if (etapaAtual > 1) {
-      setEtapaAtual(etapaAtual - 1);
+useEffect(() => {
+    if (etapa === 3 && data) {
+      buscarHorarios();
     }
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [etapa, data]);
 
-  useEffect(() => {
-    const carregarHorariosOcupados = async () => {
-      if (!dataSelecionada) return;
-      const db = getFirestore();
-      const agendamentosRef = collection(db, "agendamentos");
-      const dataFormatada = format(dataSelecionada, "yyyy-MM-dd");
-      const q = query(agendamentosRef, where("data", "==", dataFormatada));
-      const querySnapshot = await getDocs(q);
-      const horarios = querySnapshot.docs.map(doc => doc.data().horario);
-      setHorariosOcupados(horarios);
-    };
-
-    carregarHorariosOcupados();
-  }, [dataSelecionada]);
-
-  const salvarAgendamento = async () => {
-    const user = auth.currentUser;
-
-    if (!user) {
-      console.error("Usuário não autenticado");
-      return;
-    }
-
-    if (servicosSelecionados.length === 0 || !dataSelecionada || !horarioSelecionado) {
-      console.error("Dados incompletos para salvar agendamento");
-      return;
-    }
-
-    const db = getFirestore();
-    const servicosSelecionadosDetalhes = servicos.filter((s) => servicosSelecionados.includes(s.id));
-    const agendamento = {
-      userId: user.uid,
-      nome: user.displayName ?? "Usuário",
-      email: user.email ?? "sem-email",
-      servicos: servicosSelecionadosDetalhes.map((s) => s.nome),
-      data: format(dataSelecionada, "yyyy-MM-dd"),
-      horario: horarioSelecionado,
-      criadoEm: new Date()
-    };
-
+  const buscarHorarios = async () => {
+    setCarregando(true);
     try {
-      await addDoc(collection(db, "agendamentos"), agendamento);
-      console.log("✅ Agendamento salvo com sucesso no Firestore.");
+      const agendamentoRef = collection(db, 'agendamentos');
+      const q = query(agendamentoRef, where('data', '==', data));
+      const snapshot = await getDocs(q);
+      const ocupados = snapshot.docs.map((doc) => doc.data().hora);
+      setHorariosOcupados(ocupados);
     } catch (error) {
-      console.error("❌ Erro ao salvar agendamento:", error);
+      console.error('Erro ao buscar horários:', error);
+    } finally {
+      setCarregando(false);
     }
   };
 
   const confirmarAgendamento = async () => {
-    console.log("👉 Clique no botão Confirmar Agendamento");
-    await salvarAgendamento();
-    console.log("✅ Agendamento confirmado.");
-    setAgendamentoConfirmado(true);
+    if (!servico || !data || !hora || !cpf) {
+      alert('Preencha todos os campos.');
+      return;
+    }
+
+    try {
+      // ⚡ Verifica se o horário ainda está livre
+      const agendamentoRef = collection(db, 'agendamentos');
+      const q = query(
+        agendamentoRef,
+        where('data', '==', data),
+        where('hora', '==', hora)
+      );
+      const snapshot = await getDocs(q);
+
+      if (!snapshot.empty) {
+        alert('Horário já agendado. Escolha outro.');
+        return;
+      }
+
+      // ✅ Salva no Firestore
+      await addDoc(agendamentoRef, {
+  servico, // string única
+  data,
+  hora,
+  cpf,     // campo de nome do cliente, se quiser manter como CPF
+  criadoEm: new Date(),
+});
+
+
+      alert('Agendamento realizado com sucesso!');
+      resetar();
+    } catch (error) {
+      console.error('Erro ao confirmar agendamento:', error);
+      alert('Erro ao confirmar. Tente novamente.');
+    }
+  };
+
+  const resetar = () => {
+    setEtapa(1);
+    setServico([]);
+    setData('');
+    setHora('');
+    setCpf('');
+    setHorariosOcupados([]);
   };
 
   return (
     <>
-      <div className="fundo"></div>
-      <HeaderLogado />
-      <div className="agendamento-container">
-        <h1>Agende seu serviço</h1>
-        <p className="texto-branco">
-          Escolha o serviço, data e horário de sua preferência
-        </p>
+    <Header/>
+    <div className='agendamento'>
+    <div className="agendamento-container">
+      {etapa === 1 && (
+        <div className="etapa">
+        <h2>Escolha o serviço desejado:</h2>
+            <div style={{ display: 'flex', flexDirection: 'column' }} className="opcoes">
+                {servicos.map((s) => (
+                  <button
+                    key={s}
+                    className={servico.includes(s) ? 'ativo' : 'inativo'}
+                    onClick={() => {
+                      setServico((prevSelecionados) =>
+                        prevSelecionados.includes(s)
+                          ? prevSelecionados.filter(item => item !== s)
+                          : [...prevSelecionados, s]
+                      );
+                    }}
+                  >
+                    {s}
+                  </button>
+                  ))}
 
-        <div className="passos">
-          {etapas.map((etapa, idx) => (
-            <div key={idx} className={`passo ${etapaAtual === idx + 1 ? "ativo" : ""}`}>
-              <div className="numero">{idx + 1}</div>
-              <span>{etapa}</span>
             </div>
-          ))}
+              <div className="botoes">
+                 <button disabled={servico.length === 0} onClick={() => setEtapa(2)}>Próximo</button>
+              </div> 
         </div>
+      )}
 
-        {etapaAtual === 1 && (
-          <div className="selecao">
-            <h2>Escolha um ou mais serviços:</h2>
-            <div className="servicos-grid">
-              {servicos.map((s) => (
-                <div
-                  key={s.id}
-                  className={`card-servico ${servicosSelecionados.includes(s.id) ? "selecionado" : ""}`}
-                  onClick={() => toggleServico(s.id)}
-                >
-                  <h3>{s.nome}</h3>
-                  <span className="duracao">Duração: <strong>{s.duracao}</strong></span>
-                  <p className="preco">{s.preco}</p>
-                </div>
-              ))}
-            </div>
-            {servicosSelecionados.length > 0 && (
-              <div>
-                <button className="botoes-navegacao" onClick={prosseguir}>Prosseguir</button>
-              </div>
-            )}
+      {etapa === 2 && (
+        <div className="etapa">
+          <h2>Escolha a data desejada:</h2>
+          <input
+            type="date"
+            value={data}
+            onChange={(e) => setData(e.target.value)}
+          />
+          <div className="botoes">
+            <button onClick={() => setEtapa(1)}>Voltar</button>
+            <button disabled={!data} onClick={() => setEtapa(3)}>Próximo</button>
           </div>
-        )}
+        </div>
+      )}
 
-        {etapaAtual === 2 && (
-          <div className="selecao" style={{ position: "relative" }}>
-            <button className="botao-voltar-topo" onClick={voltar}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Voltar
-            </button>
-            <h2>Escolha a Data</h2>
-            <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center" }}>
-              <DatePicker
-                selected={dataSelecionada}
-                onChange={(date) => setDataSelecionada(date)}
-                locale={ptBR}
-                dateFormat="dd/MM/yyyy"
-                inline
-                minDate={new Date()}
-              />
-            </div>
-            {dataSelecionada && (
-              <div>
-                <button className="botoes-navegacao"onClick={prosseguir}>Prosseguir</button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {etapaAtual === 3 && (
-          <div className="selecao" style={{ position: "relative" }}>
-            <button className="botao-voltar-topo" onClick={voltar}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Voltar
-            </button>
-            <h2>Escolha o horário desejado:</h2>
+      {etapa === 3 && (
+        <div className="etapa">
+          <h2>Escolha o horário desejado:</h2>
+          {carregando ? (
+            <p>Carregando...</p>
+          ) : todosHorarios.filter(h => !horariosOcupados.includes(h)).length === 0 ? (
+            <p>Nenhum horário disponível neste dia.</p>
+          ) : (
             <div className="datas-grid">
-              {horarios.map((horario, idx) => (
+              {todosHorarios.map((horario, idx) =>
                 !horariosOcupados.includes(horario) && (
                   <div
                     key={idx}
-                    className={`data-item ${horarioSelecionado === horario ? "selecionado" : ""}`}
-                    onClick={() => setHorarioSelecionado(horario)}
+                    className={`data-item ${hora === horario ? "h-ativo" : "h-inativo"}`}
+                    onClick={() => setHora(horario)}
                   >
                     {horario}
                   </div>
                 )
-              ))}
+              )}
             </div>
-            {horarioSelecionado && (
-              <div>
-                <button className="botoes-navegacao" onClick={prosseguir}>Prosseguir</button>
-              </div>
-            )}
+          )}
+          <div className="botoes">
+            <button onClick={() => setEtapa(2)}>Voltar</button>
+            <button disabled={!hora} onClick={() => setEtapa(4)}>Próximo</button>
           </div>
-        )}
+        </div>
+      )}
 
-        {etapaAtual === 4 && (
-          <div className="selecao">
-            {!agendamentoConfirmado ? (
-              <>
-                <h2>Confirme seu agendamento:</h2>
-                <div style={{ textAlign: "left", background: "#fff", padding: "1.5rem", borderRadius: "12px", marginTop: "1rem" }}>
-                  <p><strong>Serviços:</strong></p>
-                  <ul>
-                    {servicosSelecionados.map((id) => {
-                      const servico = servicos.find(s => s.id === id);
-                      const precoNumerico = parsePreco(servico.preco);
-                      return (
-                        <li style={{color: "black"}}key={id}>
-                          {servico.nome} - R$ {precoNumerico.toFixed(2).replace(".", ",")}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  <p><strong>Total:</strong> R$ {
-                    servicosSelecionados.reduce((total, id) => {
-                      const servico = servicos.find(s => s.id === id);
-                      return total + parsePreco(servico.preco);
-                    }, 0).toFixed(2).replace(".", ",")
-                  }</p>
-                  <p><strong>Data:</strong> {dataSelecionada ? format(dataSelecionada, "dd/MM/yyyy") : ""}</p>
-                  <p><strong>Horário:</strong> {horarioSelecionado}</p>
-                </div>
-                <div>
-                  <button className="botao-voltar-topo" onClick={voltar}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Voltar
-                  </button>
+      {etapa === 4 && (
+        <div className="etapa">
+          <h2>Confirmação:</h2>
+          <p><strong>Serviço:</strong> {servico}</p>
+          <p><strong>Data:</strong> {data}</p>
+          <p><strong>Hora:</strong> {hora}</p>
 
-                  <button className="botoes-navegacao" onClick={confirmarAgendamento}>
-                    Confirmar agendamento!
-                  </button>
-                </div>
-              </>
-            ) : (
-              <div>
-                <h2>Obrigado! Agendamento confirmado com sucesso!</h2>
-                <p>Seu corte foi agendado. Você pode acessar seu perfil ou voltar para a página inicial.</p>
-                <div>
-                  <button className="botoes-navegacao" onClick={() => navigate("/perfil")}>Ir para Meu Perfil</button>
-                  <button className="botoes-navegacao" onClick={() => navigate("/")}>Sair</button>
-                </div>
-              </div>
-            )}
+          <input
+            type="text"
+            placeholder="Digite seu CPF"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+          />
+
+          <div className="botoes">
+            <button onClick={() => setEtapa(3)}>Voltar</button>
+            <button disabled={!cpf} onClick={confirmarAgendamento}>Confirmar</button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+    </div>
+    </div>
     </>
   );
 };

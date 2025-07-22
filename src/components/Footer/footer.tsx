@@ -23,11 +23,11 @@ function Footer(){
 
                 <div className='separar-redes'>
                 <a href="https://www.instagram.com/esquadraobarbearia/" target="_blank" rel="noopener noreferrer">
-                    <img src="/Footer/instagram.png" alt="Instagram" style={{ width: '30px', height: '30px' }} />
+                    <img src="./public/Footer/instagram.png" alt="Instagram" style={{ width: '30px', height: '30px' }} />
                 </a>
 
                 <a href="https://wa.me/5524998614631" target="_blank" rel="noopener noreferrer">
-                    <img src="/Footer/whatsapp.png" alt="Instagram" style={{ width: '30px', height: '30px' }} />
+                    <img src="./public/Footer/whatsapp.png" alt="Instagram" style={{ width: '30px', height: '30px' }} />
                 </a>
                 </div>
             </div>

@@ -14,7 +14,6 @@
 .barb-esquadrao{
     width: 300px;
     font-weight: bold;
- 
 }
 
 .redes-sociais{
@@ -35,17 +34,17 @@
 
 @media (max-width: 1200px){
     .footer{   
-    height: 100vh; 
+    height: 60vh; 
     display: flex;
     flex-direction: column;
     gap: 0;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-bottom: 10%;
+    padding-bottom: 5%;
     }
     .barb-esquadrao{
-    width: 100vw;
+    width: 80vw;
 }
 
 }

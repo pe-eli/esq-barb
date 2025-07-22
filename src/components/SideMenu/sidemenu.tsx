@@ -27,7 +27,9 @@ const SideMenu: React.FC<Props> = ({ onClose }) => {
   };
 
   // Verifica se é admin pelo email
-  const isAdmin = user?.email === 'mp6171745@gmail.com' || 'p.mouuraa05@gmail.com'; 
+  const adminEmails = ['mp6171745@gmail.com', 'p.mouuraa05@gmail.com'];
+const isAdmin = adminEmails.includes(user?.email ?? '');
+
   
 
   return (
@@ -49,23 +51,23 @@ const SideMenu: React.FC<Props> = ({ onClose }) => {
 
         <div className="section">
           <p className="section-title">Principal</p>
-          <button className="botao-side" onClick={() => navigate('/')}>Home</button>
-          <button className="botao-side" onClick={() => navigate('/agendamento')}>Novo agendamento</button>
+          <button onClick={() => navigate('/')}>🏠 Home</button>
+          <button onClick={() => navigate('/agendamento')}>🧍‍♂️ Novo Agendamento</button>
         </div>
 
         {isAdmin && (
           <div className="section">
             <p className="section-title">Admin</p>
-            <button className="botao-side" onClick={() => navigate('/dashboard')}>Dashboard</button>
-            <button className="botao-side" onClick={() => navigate('/admin/usuarios')}>Gerenciar usuários</button>
-            <button className="botao-side" onClick={() => navigate('/servicos')}>Gerenciar serviços</button>
+            <button onClick={() => navigate('/dashboard')}>📊 Dashboard</button>
+            <button onClick={() => navigate('/admin/usuarios')}>👥 Gerenciar Usuários</button>
+            <button onClick={() => navigate('/servicos')}>💈 Gerenciar Serviços</button>
           </div>
         )}
 
         <div className="section">
           <p className="section-title">Minha Conta</p>
-          <button className="botao-side" onClick={() => navigate('/perfil')}>Meu perfil</button>
-          <button className="logout-button" onClick={handleLogout}>Sair</button>
+          <button onClick={() => navigate('/perfil')}>👤 Meu Perfil</button>
+          <button className="logout-button" onClick={handleLogout}>🚪 Sair</button>
         </div>
       </div>
     </div>

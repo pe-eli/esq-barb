@@ -21,7 +21,6 @@ body {
   min-height: 100vh;
   overflow: hidden;
   position: relative;
-  
 }
 
 .foto-de-fundo{
@@ -30,7 +29,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/Home/background-barbearia.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -87,41 +85,23 @@ body {
   
 }
 
-.esticar-home {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+.esticar-home{
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        color: white;
+        text-align: center;
 }
 
-.bg-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/Home/background-barbearia.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.4; /* 👈 só o fundo terá opacidade */
-  z-index: 0;
-}
-
-.centralize {
-  position: relative;
-  z-index: 1; /* 👈 conteúdo por cima do fundo */
-  text-align: center;
-  color: white;
-}
-
-@media(max-width: 1200px){
+@media(max-width: 700px){
   .slogan{
     display: flex;
     font-size: 1.2rem;
+  }
+  .esticar-home{
+    background-image: url('Home/bg.png');
   }
   .button-cnt{
     margin-top: 8%;
@@ -147,7 +127,7 @@ body {
   color: black;
   display: flex;
   gap: 7%;
-  background-color: rgba(255, 255, 255, 0.875);
+  background-color: rgba(255, 255, 255);
   justify-content: center;
   text-align: center;
 }
@@ -185,7 +165,7 @@ body {
   align-items: center;
 }
 
-@media(max-width: 1200px){  
+@media(max-width: 1300px){  
   .about-section{
     display: flex;
     flex-direction: column;
@@ -297,7 +277,7 @@ body {
 @media(max-width:1200px){
     .espaco-section{
         display: flex;
-        height: 190vh;
+        height: 160vh;
     }
     .sobre-barbearia{
     display: flex;
@@ -321,17 +301,11 @@ body {
     --dist-sobre: 10%;
 }
 
-@media screen and (max-width:400px){
-  .espaco-section{
-        display: flex;
-        height: 200vh;
-    }
-}
 /* -----------------------------------------SEÇÃO GOOGLE MAPS, ONDE ESTAMOS---------------------------------- */
 
 .local-section {
     min-height: 100vh;
-    background-color: rgba(255, 255, 255, 0.875);
+    background-color: rgba(255, 255, 255);
     color: #000;
     display: flex;
     gap: 10%;
@@ -360,17 +334,18 @@ body {
 }
 
 @media(max-width:1200px){
-  .background-image{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.4;
-    z-index: -1; 
+
+.background-image{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  z-index: -1; 
 }
 .foto-de-fundo{
   display: none;
@@ -379,10 +354,10 @@ body {
   .onde-estamos{
     color: #000;
     margin-top: 0;
-    margin-bottom: 10%;
+    width: 80vw;
 }
   .mapa{
-    width: 95vw;
+    width: 90vw;
     height: 40vh;
   }
   .local-section {

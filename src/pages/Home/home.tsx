@@ -1,23 +1,16 @@
 import Footer from '../../components/Footer/footer';
 import Header from '../../components/Header/header';
-import HeaderLogado from '../../components/HeaderLogado/header-logado';
 import './home.modules.css';
-import { useAuth } from '../../context/AuthContext'; // ajuste conforme o caminho do seu contexto
 
 function Home() {
-  const { user, loading } = useAuth();
-
-  if (loading) return null; // ou um spinner
 
   return (
     <>
-      
-      {user ? <HeaderLogado /> : <Header />}
-
-    <section className="esticar-home">
-        <div className="bg-overlay" />
+      <img className="foto-de-fundo" src="/Home/background-barbearia.jpg" alt="" />
+      <Header />
+      <section className='esticar-home'>
         <div className="centralize">
-          <img className="title" src="/Home/nome.png" alt="Esquadrão Barbearia" />
+          <img className="title" src="./public/Home/nome.png" alt="Esquadrão Barbearia" />
           <h3 className="slogan">Cabelo na régua, confiança no topo.</h3>
           <button className="button-cnt">Conheça nosso trabalho</button>
         </div>
@@ -31,7 +24,7 @@ function Home() {
           </p>
         </div>
         <figure className='picture'>
-          <img className='foto-bruno' src="/Sobre/bruno.webp" alt="Bruno Estevam, fundador da barbearia." />
+          <img className='foto-bruno' src="./public/Sobre/bruno.webp" alt="Bruno Estevam, fundador da barbearia." />
           <figcaption className='figcaption'>Bruno Estevam, fundador da Esquadrão Barbearia.</figcaption>
         </figure>
       </section>
@@ -44,7 +37,7 @@ function Home() {
             <div className='cjt-icone-texto'>
               <div className='circulo'>
                 <h1 className='icone-geral'>
-                  <img className='icone' src="/Espaço/lamina-de-barbear.png" alt="" />
+                  <img className='icone' src="./public/Espaço/lamina-de-barbear.png" alt="" />
                 </h1>
               </div>
               <h2 className='descricao-icone'>Oferecemos apenas o melhor...</h2>
@@ -53,7 +46,7 @@ function Home() {
             <div className='cjt-icone-texto'>
               <div className='circulo'>
                 <h1 className='icone-geral'>
-                  <img className='icone' src="/Espaço/penteado.png" />
+                  <img className='icone' src="./public/Espaço/penteado.png" />
                 </h1>
               </div>
               <h2 className='descricao-icone'>Com anos de experiência...</h2>
@@ -62,7 +55,7 @@ function Home() {
             <div className='cjt-icone-texto'>
               <div className='circulo'>
                 <h1 className='icone-geral'>
-                  <img className='icone' src="/Espaço/barbearia.png" />
+                  <img className='icone' src="./public/Espaço/barbearia.png" />
                 </h1>
               </div>
               <h2 className='descricao-icone'>Ambiente criado para conforto...</h2>

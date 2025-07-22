@@ -4,7 +4,7 @@ import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import HeaderLogado from "../../components/HeaderLogado/header-logado";
+import Header from "../../components/Header/header";
 
 interface Servico {
   id: string;
@@ -54,7 +54,7 @@ const GerenciarServicos: React.FC = () => {
     };
 
     buscarServicos();
-  }, [user]);
+  }, [isAdmin, navigate, user]);
 
   const alternarAtivacao = async (id: string, estadoAtual: boolean) => {
     const docRef = doc(db, "servicosDisponiveis", id);
@@ -69,7 +69,7 @@ const GerenciarServicos: React.FC = () => {
 
   return (
     <>
-    <HeaderLogado />
+    <Header />
     <div className="gerenciar-servicos-container">
       <h1>Gerenciar Serviços</h1>
       <div className="servicos-grid">

@@ -13,13 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
   overflow-x: hidden;
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: auto;
 }
+
+
