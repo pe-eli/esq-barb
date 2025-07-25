@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "../pages/Home/home";
 import Agende from "../pages/Agende/agende";
-import GerenciarServicos from "../pages/GerenciarServicos/GerenciarServicos";
+import MeusAgendamentos from "../pages/meusagendamentos/meusagendamentos";
+import AdmAgendamentos from "../pages/adm/adm"; // nome com letra maiúscula!
 
 function AppRoutes() {
   return (
@@ -9,7 +10,8 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/agendamento" element={<Agende />} />
-        <Route path="/servicos" element={<GerenciarServicos />} />
+        <Route path="/meusagendamentos" element={<MeusAgendamentos />} />
+        <Route path="/adm" element={<AdmAgendamentos />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
