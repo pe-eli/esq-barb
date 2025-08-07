@@ -3,7 +3,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url('Agende/fundo.png');
+  background-image: url('/Agende/fundo.png');
   background-position: 65% 50%;
 }
 
@@ -174,7 +174,7 @@ input[type="text"] {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url('Agende/fundobrb.jpg');
+  background-image: url('/Agende/fundo.png');
   background-position: 65% 50%;
 }
 
