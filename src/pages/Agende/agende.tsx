@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -231,7 +232,7 @@ const Agendamento: React.FC = () => {
       selected={data ? new Date(data) : null}
       onChange={(date) => {
   if (date) {
-    setData(date.toISOString().split("T")[0]);
+    setData(format(date, 'yyyy-MM-dd'));
   } else {
     setData('');
   }
