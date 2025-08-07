@@ -88,7 +88,7 @@ const formatarData = (dataString: string) => {
               placeholder="Digite seu telefone"
             />
             <button
-              style={{ cursor: 'pointer', backgroundColor: 'green' }}
+              style={{ cursor: 'pointer', backgroundColor: 'green', height: '5vh', color: 'white', fontSize: '0.8rem' }}
               onClick={buscarAgendamentos}
             >
               Buscar
