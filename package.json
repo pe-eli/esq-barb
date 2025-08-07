@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-  "dev": "vite --host",
-  "build": "vite build",
-  "preview": "vite preview",
-  "lint": "eslint ."
-},
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
   "dependencies": {
     "@prisma/client": "^6.8.2",
     "axios": "^1.9.0",

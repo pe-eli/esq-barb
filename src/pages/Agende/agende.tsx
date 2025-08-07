@@ -1,3 +1,6 @@
+import { ptBR } from 'date-fns/locale';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import React, { useEffect, useState } from 'react';
 import './agende.css';
 import Header from '../../components/Header/header';
@@ -222,34 +225,60 @@ const Agendamento: React.FC = () => {
           {etapa === 2 && (
   <div className="etapa">
     <h2>Escolha a data desejada:</h2>
-    <input
-      style={{ backgroundColor: '#ccc', color: 'black', marginBottom:'1.5rem' }}
-      type="date"
-      value={data}
-      min={new Date().toISOString().split('T')[0]} // impede datas passadas
-      onChange={(e) => setData(e.target.value)}
+    
+    <DatePicker
+      locale={ptBR}
+      selected={data ? new Date(data) : null}
+      onChange={(date) => {
+  if (date) {
+    setData(date.toISOString().split("T")[0]);
+  } else {
+    setData('');
+  }
+}}
+
+      minDate={new Date()}
+      filterDate={(date) => date.getDay() !== 0} // Bloqueia domingos (0 = domingo)
+      dateFormat="yyyy-MM-dd"
+      placeholderText="Selecione a data"
+      className="custom-datepicker"
+      wrapperClassName="custom-datepicker-wrapper"
     />
-    <div style={{width: window.innerWidth < 1000 ? '100%' : '80%'}}
-         className="botoes">
-      <button style={{width: window.innerWidth < 1000 ? '40%' : '100%', 
-                              height: '2.8rem',
-                              justifyContent: 'center',
-                              textAlign: 'center',
-                              alignItems: 'center'}}
-                      disabled={servico.length === 0} onClick={() => setEtapa(1)}>
-                Voltar
-              </button>
-       <button style={{width: window.innerWidth < 1000 ? '40%' : '100%', 
-                              height: '2.8rem',
-                              justifyContent: 'center',
-                              textAlign: 'center',
-                              alignItems: 'center'}}
-                      disabled={servico.length === 0} onClick={() => setEtapa(3)}>
-                Próximo
-              </button>
+
+    <div
+      style={{ width: window.innerWidth < 1000 ? '100%' : '80%' }}
+      className="botoes"
+    >
+      <button
+        style={{
+          width: window.innerWidth < 1000 ? '40%' : '100%',
+          height: '2.8rem',
+          justifyContent: 'center',
+          textAlign: 'center',
+          alignItems: 'center',
+        }}
+        disabled={servico.length === 0}
+        onClick={() => setEtapa(1)}
+      >
+        Voltar
+      </button>
+      <button
+        style={{
+          width: window.innerWidth < 1000 ? '40%' : '100%',
+          height: '2.8rem',
+          justifyContent: 'center',
+          textAlign: 'center',
+          alignItems: 'center',
+        }}
+        disabled={servico.length === 0 || !data}
+        onClick={() => setEtapa(3)}
+      >
+        Próximo
+      </button>
     </div>
   </div>
 )}
+
           {etapa === 3 && (
             <div className="etapa">
               <h2 style={{width: window.innerWidth < 1000 ? '80%' : '100%', margin: '0 auto', }}>
