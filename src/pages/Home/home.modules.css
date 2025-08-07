@@ -111,7 +111,7 @@ body {
     display: none;
   }
   .foto-de-fundo-mb{
-    background-image: url('Home/bg.jpg');
+    background-image: url('/Home/bg.jpg');
     position: fixed;
     top: 0;
     left: 0;
