@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import {
   collection,
@@ -46,6 +47,15 @@ const formatarDataComDiaSemana = (dataStr: string) => {
 const AdmAgendamentos: React.FC = () => {
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
   const [dataFiltro, setDataFiltro] = useState('');
+  useEffect(() => {
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+  const dia = String(hoje.getDate()).padStart(2, '0');
+  const dataHoje = `${ano}-${mes}-${dia}`;
+  setDataFiltro(dataHoje);
+}, []);
+
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState('');
 
@@ -212,7 +222,7 @@ const AdmAgendamentos: React.FC = () => {
   return (
     <>
     <div className='wallpaper'>
-      <Header />
+      <Header/>
       <div className="agendamentos-container">
         {!autenticado ? (
           <>
@@ -224,28 +234,48 @@ const AdmAgendamentos: React.FC = () => {
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
               />
-              <button onClick={handleLogin}>Entrar</button>
+              <button style={{color: 'black', backgroundColor: '#F5D101',
+                              borderRadius:'8px', fontWeight: 'bold',
+                              marginTop: '1rem'
+              }}onClick={handleLogin}>Entrar</button>
             </div>
           </>
         ) : (
           <>
             <h1>Painel do Barbeiro</h1>
-
+            <Link className="ger-serv"to="/gerenciar-servicos">Gerenciar serviços ativos</Link>
             <div className="search-box">
               <input
                 type="date"
                 value={dataFiltro}
                 onChange={(e) => setDataFiltro(e.target.value)}
-              />
-              <button onClick={handleFiltrar} disabled={loading}>
+                 style={{
+                  color: '#fff',       // Cor do texto
+                  backgroundColor: '#333', // Cor do fundo
+                  border: '1px solid #ccc',
+                  padding: '8px',
+                  borderRadius: '4px'
+                }}  
+                            />
+              <button style={{color: 'black', backgroundColor: '#F5D101',
+                              borderRadius:'8px', fontWeight: 'bold',
+                              marginTop: '1rem'}}
+                              onClick={handleFiltrar} disabled={loading}>
                 {loading ? 'Filtrando...' : 'Filtrar por data'}
               </button>
 
               {/* Botões adicionais */}
               <div style={{ display: 'flex', gap: '10px', marginTop: '10px', flexWrap: 'wrap' }}>
-                <button onClick={() => filtrarPorDia(0)}>Hoje</button>
-                <button onClick={() => filtrarPorDia(1)}>Amanhã</button>
-                <button onClick={filtrarSemana}>Essa semana</button>
+                <button style={{color: 'black', backgroundColor: '#F5D101',
+                              borderRadius:'8px', fontWeight: 'bold',
+                              marginTop: '1rem'}}
+                              onClick={() => filtrarPorDia(0)}>Hoje</button>
+                <button style={{color: 'black', backgroundColor: '#F5D101',
+                              borderRadius:'8px', fontWeight: 'bold',
+                              marginTop: '1rem'}}onClick={() => filtrarPorDia(1)}>Amanhã</button>
+                <button style={{color: 'black', backgroundColor: '#F5D101',
+                              borderRadius:'8px', fontWeight: 'bold',
+                              marginTop: '1rem'}}onClick={filtrarSemana}>Essa semana</button>
               </div>
             </div>
 

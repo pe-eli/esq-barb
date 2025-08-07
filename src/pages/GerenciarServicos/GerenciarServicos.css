@@ -1,9 +1,18 @@
 .gerenciar-servicos-container {
   max-width: 900px;
+  width: 100vw;
   margin: 0 auto;
-  padding: 2rem;
   font-family: "Segoe UI", sans-serif;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/ADM/adm.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .gerenciar-servicos-container h1 {
@@ -11,6 +20,19 @@
   margin-bottom: 2rem;
 }
 
+.adm{
+  display: flex;
+  text-align: center;
+  width: 15rem;
+  color: white;
+  border-color: white;
+  font-weight: bold;
+  border: 2px solid white;
+  padding: 0.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+}
 .adicionar-servico-form{
   display: flex;
   justify-content: center;
@@ -61,7 +83,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40%;
+  width: 120%;
 }
 
 .card-servico.inativo {
@@ -103,6 +125,7 @@
   background-color: green;
   font-size: 1rem;
   font-weight: bold;
+  color: white;
 }
 
 .servicos-grid {

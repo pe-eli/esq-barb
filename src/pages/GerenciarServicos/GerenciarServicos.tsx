@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./GerenciarServicos.css";
 import Header from "../../components/Header/header";
 
@@ -60,9 +61,11 @@ const GerenciarServicos: React.FC = () => {
 
   return (
     <>
-      <Header />
+      
       <div className="gerenciar-servicos-container">
+        <Header />
         <h1>Gerenciar Serviços</h1>
+        <Link className="adm"to="/adm">Visualizar todos os agendamentos</Link>
         <h2 style={{ borderTop: "1px solid white", paddingTop: "1vh", marginBottom: 0 }}>
           Adicionar Novo Serviço
         </h2>

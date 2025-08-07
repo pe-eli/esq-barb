@@ -10,10 +10,25 @@
   background-attachment: fixed;
 }
 
+.ger-serv{
+  text-align: center;
+  width: 15rem;
+  color: white;
+  border-color: white;
+  font-weight: bold;
+  border: 2px solid white;
+  padding: 0.6rem;
+  border-radius: 12px;
+  text-decoration: none;
+}
 .agendamentos-container {
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .agendamentos-container h1 {
@@ -26,7 +41,9 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  margin-top: 2rem;
   margin-bottom: 20px;
+  color: white;
 }
 
 .search-box input[type="date"],
