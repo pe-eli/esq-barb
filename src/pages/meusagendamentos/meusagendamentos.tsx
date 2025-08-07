@@ -102,7 +102,9 @@ const formatarData = (dataString: string) => {
                   <>
                     <h3>Seus agendamentos:</h3>
                     {agendamentos.map((agendamento) => {
-                      const dataHoraAgendada = new Date(`${agendamento.data}T${agendamento.hora}`);
+                      const [ano, mes, dia] = agendamento.data.split('-').map(Number);
+                      const [hora, minuto] = agendamento.hora.split(':').map(Number);
+                      const dataHoraAgendada = new Date(ano, mes - 1, dia, hora, minuto);
                       const agora = new Date();
                       const agendamentoFuturo = dataHoraAgendada > agora;
 
