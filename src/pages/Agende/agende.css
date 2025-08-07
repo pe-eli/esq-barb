@@ -1,6 +1,6 @@
 .agendamento{
   width: 100vw; 
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-image: url('/Agende/fundo.png');
@@ -17,6 +17,7 @@
   justify-content: center;
   margin-left: 23%;
   margin-top: 2%;
+ 
 }
 h2 {
   text-align: center;
@@ -161,17 +162,18 @@ input[type="text"] {
   }
 }
 
-@media(max-width: 1000px){
+@media(max-width: 600px){
   .agendamento-container{
     display: flex;
     width: 70vw;
     margin-left: 7%;
     margin-top: 20%;
+    margin-bottom: 20%;
   }
 
   .agendamento{
   width: 100vw; 
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-image: url('/Agende/fundobrb.jpg');

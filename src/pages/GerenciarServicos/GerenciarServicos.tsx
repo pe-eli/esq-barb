@@ -61,10 +61,10 @@ const GerenciarServicos: React.FC = () => {
 
   return (
     <>
-      
-      <div className="gerenciar-servicos-container">
+      <div className="wp">
         <Header />
-        <h1>Gerenciar Serviços</h1>
+      <div className="gerenciar-servicos-container">
+        <h1 style={{textAlign: 'center'}}>Gerenciar Serviços</h1>
         <Link className="adm"to="/adm">Visualizar todos os agendamentos</Link>
         <h2 style={{ borderTop: "1px solid white", paddingTop: "1vh", marginBottom: 0 }}>
           Adicionar Novo Serviço
@@ -137,6 +137,7 @@ const GerenciarServicos: React.FC = () => {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </>
   );

@@ -284,12 +284,12 @@ const Agendamento: React.FC = () => {
                       disabled={servico.length === 0} onClick={() => setEtapa(2)}>
                 Voltar
               </button>
-                <button style={{width: window.innerWidth < 1000 ? '40%' : '100%', 
+                <button style={{width: window.innerWidth < 600 ? '40%' : '100%', 
                               height: '2.8rem',
                               justifyContent: 'center',
                               textAlign: 'center',
                               alignItems: 'center'}}
-                      disabled={servico.length === 0} onClick={() => setEtapa(4)}>
+                      disabled={servico.length === 0 || !hora} onClick={() => setEtapa(4)}>
                 Próximo
               </button>
               </div>

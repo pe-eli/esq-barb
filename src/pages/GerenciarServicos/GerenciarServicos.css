@@ -1,13 +1,15 @@
 .gerenciar-servicos-container {
-  max-width: 900px;
-  width: 100vw;
+  width: 50vw;
   margin: 0 auto;
   font-family: "Segoe UI", sans-serif;
-  text-align: center;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.wp{
   background-image: url('/ADM/adm.jpg');
   background-repeat: no-repeat;
   background-size: cover;
