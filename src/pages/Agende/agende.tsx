@@ -1,3 +1,4 @@
+import { parse } from 'date-fns';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import DatePicker from "react-datepicker";
@@ -30,7 +31,7 @@ const Agendamento: React.FC = () => {
   const [etapa, setEtapa] = useState(1);
   const [servicos, setServicos] = useState<{ nome: string; preco: string }[]>([]);
   const [servico, setServico] = useState<string[]>([]);
-  const [data, setData] = useState(() => new Date().toISOString().split('T')[0]);
+const [data, setData] = useState(() => format(new Date(), 'yyyy-MM-dd'));
   const [hora, setHora] = useState('');
   const [telefone, setTelefone] = useState('');
   const [nome, setNome] = useState('');
@@ -229,10 +230,12 @@ const Agendamento: React.FC = () => {
     
     <DatePicker
       locale={ptBR}
-      selected={data ? new Date(data) : null}
+      selected={data ? parse(data, 'yyyy-MM-dd', new Date()) : null}
       onChange={(date) => {
   if (date) {
-    setData(format(date, 'yyyy-MM-dd'));
+    const dataLocal = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+setData(format(dataLocal, 'yyyy-MM-dd'));
+
   } else {
     setData('');
   }
