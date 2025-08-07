@@ -6,7 +6,7 @@ function Header() {
         <>
             <header>   
                 <Link to="/">
-                    <img className="logo" src="./public/Header/logo.png" alt="Logo da barbearia" />
+                    <img className="logo" src="/Header/logo.png" alt="Logo da barbearia" />
                 </Link>
                 <div className='botoes-header'>
                     <Link className="consulta" to="/meusagendamentos">Meus agendamentos</Link>

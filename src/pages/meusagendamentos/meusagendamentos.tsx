@@ -1,100 +1,141 @@
-import React, { useState } from 'react';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { useState } from 'react';
+import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
-import './meusagendamentos.css';
 import Header from '../../components/Header/header';
+import './meusagendamentos.css';
 
-interface Agendamento {
-  servico: string;
+type Agendamento = {
+  id: string;
+  servico: string[] | string;
   data: string;
   hora: string;
-}
+};
 
-const ConsultAgendamentos: React.FC = () => {
-  const [cpf, setCpf] = useState('');
+function ConsultarAgendamentos() {
+  const [telefone, setTelefone] = useState('');
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [buscaIniciada, setBuscaIniciada] = useState(false);
 
-  const handleSearch = async () => {
-    setLoading(true);
-    setError('');
-    setAgendamentos([]);
+  const formatarTelefone = (valor: string) => {
+    const numeros = valor.replace(/\D/g, '').slice(0, 11);
+    if (numeros.length <= 10) {
+      return numeros
+        .replace(/^(\d{2})(\d)/, '($1) $2')
+        .replace(/(\d{4})(\d)/, '$1-$2');
+    } else {
+      return numeros
+        .replace(/^(\d{2})(\d)/, '($1) $2')
+        .replace(/(\d{5})(\d)/, '$1-$2');
+    }
+  };
 
+  const removerMascaraTelefone = (valor: string) => valor.replace(/\D/g, '');
+
+  const buscarAgendamentos = async () => {
+    setBuscaIniciada(true);
     try {
-      const q = query(collection(db, 'agendamentos'), where('cpf', '==', cpf));
+      const telefoneLimpo = removerMascaraTelefone(telefone);
+      const q = query(collection(db, 'agendamentos'), where('telefone', '==', telefoneLimpo));
       const querySnapshot = await getDocs(q);
-      const results: Agendamento[] = [];
-
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        results.push({
-          servico: data.servico,
-          data: data.data,
-          hora: data.hora,
-        });
-      });
+      const results = querySnapshot.docs.map((docItem) => ({
+        id: docItem.id,
+        ...docItem.data(),
+      })) as Agendamento[];
 
       setAgendamentos(results);
-    } catch (err) {
-      console.error(err);
-      setError('Erro ao buscar agendamentos.');
+    } catch (error) {
+      console.error('Erro ao buscar agendamentos:', error);
     }
+  };
 
-    setLoading(false);
+const formatarData = (dataString: string) => {
+  const [ano, mes, dia] = dataString.split('-').map(Number);
+  const data = new Date(ano, mes - 1, dia); // Aqui garantimos o fuso correto (sem UTC)
+
+  const diasSemana = [
+    'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira',
+    'Quinta-feira', 'Sexta-feira', 'Sábado'
+  ];
+
+  const diaSemana = diasSemana[data.getDay()];
+  return `${diaSemana}, ${String(dia).padStart(2, '0')}/${String(mes).padStart(2, '0')}/${ano}`;
+};
+
+
+  const handleCancel = async (id: string) => {
+    try {
+      await deleteDoc(doc(db, 'agendamentos', id));
+      alert('Agendamento cancelado com sucesso!');
+      setAgendamentos((prev) => prev.filter((a) => a.id !== id));
+    } catch (error) {
+      console.error('Erro ao cancelar agendamento:', error);
+      alert('Não foi possível cancelar o agendamento');
+    }
   };
 
   return (
     <>
-      <Header />
-      <div className="agendamento">
-        <div className="agendamento-container">
-          <h2>Consultar Agendamentos</h2>
-
-          <div className="etapa">
+      <div className='container-principal'>
+        <Header />
+        <div className='container-agendamento'>
+          <div className='input-botao'>
+            <h1 style={{ color: '#f5d101', textAlign: 'center', fontSize: '1.5rem' }}>Consultar Agendamentos</h1>
+            <p style={{ margin: '0', fontWeight: 'bold' }}>Digite seu telefone abaixo:</p>
             <input
               type="text"
-              placeholder="Digite seu CPF"
-              value={cpf}
-              onChange={(e) => setCpf(e.target.value)}
+              value={telefone}
+              onChange={(e) => setTelefone(formatarTelefone(e.target.value))}
+              placeholder="Digite seu telefone"
             />
-            <div className="botoes">
-              <button onClick={handleSearch} disabled={loading}>
-                {loading ? 'Buscando...' : 'Buscar'}
-              </button>
-            </div>
+            <button
+              style={{ cursor: 'pointer', backgroundColor: 'green' }}
+              onClick={buscarAgendamentos}
+            >
+              Buscar
+            </button>
           </div>
 
-          {error && <p className="error-message">{error}</p>}
+          <div>
+            {buscaIniciada && (
+              <>
+                {agendamentos.length > 0 ? (
+                  <>
+                    <h3>Seus agendamentos:</h3>
+                    {agendamentos.map((agendamento) => {
+                      const dataHoraAgendada = new Date(`${agendamento.data}T${agendamento.hora}`);
+                      const agora = new Date();
+                      const agendamentoFuturo = dataHoraAgendada > agora;
 
-          <div className="results" style={{ marginTop: '1.5rem' }}>
-            {agendamentos.length > 0 ? (
-              <table style={{ width: '100%', marginTop: '1rem', color: '#fff' }}>
-                <thead>
-                  <tr style={{ color: '#f5d105' }}>
-                    <th>Serviço</th>
-                    <th>Data</th>
-                    <th>Hora</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {agendamentos.map((agendamento, index) => (
-                    <tr key={index}>
-                      <td>{agendamento.servico}</td>
-                      <td>{agendamento.data}</td>
-                      <td>{agendamento.hora}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <p style={{ color: '#fff' }}>Nenhum agendamento encontrado.</p>
+                      return (
+                        <div className='servico-botao' key={agendamento.id}>
+                          <div style={{ width: '70%' }}>
+                            <p><strong>Serviço:</strong> {Array.isArray(agendamento.servico) ? agendamento.servico.join(', ') : agendamento.servico}</p>
+                            <p><strong>Data:</strong> {formatarData(agendamento.data)}</p>
+                            <p><strong>Hora:</strong> {agendamento.hora}</p>
+                          </div>
+
+                          {agendamentoFuturo && (
+                            <button
+                              className='botao-cancelar'
+                              onClick={() => handleCancel(agendamento.id)}
+                            >
+                              Cancelar
+                            </button>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <p style={{ textAlign: 'center' }}>Nenhum agendamento encontrado.</p>
+                )}
+              </>
             )}
           </div>
         </div>
       </div>
     </>
   );
-};
+}
 
-export default ConsultAgendamentos;
+export default ConsultarAgendamentos;

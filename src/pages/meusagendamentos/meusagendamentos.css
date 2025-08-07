@@ -1,86 +1,85 @@
-.agendamentos-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.agendamentos-container h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.search-box {
+.container-principal {
+  width: 100vw;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  background-image: url('/ADM/adm.jpg');
+  background-repeat: no-repeat;
+  background-size: cover; /* cobre toda a área de forma proporcional */
+  background-position: center; /* centraliza a imagem */
+}
+
+.servico-botao{
+  margin-top: 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid white;
+  padding: 1rem;
+  text-align: center;
 }
 
-.search-box input {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-  width: 250px;
-}
-
-.search-box button {
-  padding: 10px 20px;
-  font-size: 16px;
+.botao-cancelar{
+  width: 20%;
+  height: 30%;
+  background-color: red;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
-  color: #fff;
+  padding: 8px;
   cursor: pointer;
 }
 
-.search-box button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.container-agendamento{
+  margin-top: 10vh;
+  width: 30vw;
+  padding: 2rem;
+  background-color: rgba(26, 27, 32);
+  border-radius: 1.5rem;
+  margin-left: 33.5%;
 }
 
-.error-message {
-  color: red;
-  text-align: center;
-  margin-bottom: 20px;
+.input-botao{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
-.results table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+.input-botao button{
+  width: 50%;
+  border: none;
+  border-radius: 4px;
+  height: 3vh;
+  margin-top: 2%;
 }
 
-.results th, .results td {
-  border: 1px solid #ccc;
+@media(max-width:1000px){
+  .container-agendamento{
+  width: 80%;
+  margin-top: 10vh;
+  padding: 2rem;
+  background-color: rgba(26, 27, 32);
+  border-radius: 1.5rem;
+
+}
+.container-agendamento{
+  margin-top: 10vh;
+  margin-left: 2%;
+  width: 80vw;
+  padding: 2rem;
+  background-color: rgba(26, 27, 32);
+  border-radius: 1.5rem;
+}
+
+.botao-cancelar{
+  width: 30%;
+  height: 30%;
+  background-color: red;
+  border: none;
+  border-radius: 4px;
   padding: 8px;
-  text-align: left;
+  cursor: pointer;
 }
-
-.results th {
-  background-color: #f2f2f2;
-}
-.sucesso {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: white;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-.icone-check {
-  font-size: 5rem;
-  color: #4caf50;
-  margin-bottom: 1rem;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

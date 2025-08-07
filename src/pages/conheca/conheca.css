@@ -1,0 +1,121 @@
+.intro-container{
+  width: 100vw;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+background: #E6E6E6;
+background: linear-gradient(180deg,rgba(230, 230, 230, 0) 10%, rgba(31, 31, 31, 1) 60%);
+}
+
+.profile-pic{
+  border-radius: 50%;
+  width: 15%;
+}
+.profile-content{
+  width: 25vw;
+}
+.foto-descricao{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.portfolio{
+  width: 85vw;
+  height: 30vh;
+  display: flex;
+  gap: 15px;
+  flex-direction: row;
+  margin: 3% 0 3% 0;
+}
+
+.portfolio img {
+  width: 70%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.portfolio-images img:hover {
+  transform: scale(1.05);
+}
+
+.agendeja{
+  width: 10rem;
+  margin: 2% 0 5% 0;
+  color: white;
+  border-color: white;
+  font-weight: bold;
+  border: 2px solid white;
+  padding: 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+}
+
+.agendeja:hover{
+  border-color: #F5D101;
+  color: #F5D101;
+  transition: 0.3s;
+}
+
+.se-liga{
+  margin: 0;
+  padding: 0 96px 8px;
+  border-bottom: 2px solid white;
+  color: #F5D101;
+}
+
+@media(max-width: 1000px){
+
+  .profile-content{
+  width: 80vw;
+}
+
+.profile-pic{
+  border-radius: 50%;
+  width: 50%;
+}
+
+.portfolio {
+  width: 90vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* duas colunas iguais */
+  gap: 15px;
+  margin: 3% auto;
+  height: 70vh;
+}
+
+.portfolio img {
+  width: 100%; /* ocupa toda a célula */
+  height: 80%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+.agendeja{
+  width: 10rem;
+  margin: 5% 0 5% 0;
+  color: white;
+  border-color: white;
+  font-weight: bold;
+  border: 2px solid white;
+  padding: 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+}
+.se-liga{
+  display: flex;
+  width: 70%;
+  justify-content: center;
+  padding: 0 0 4px 0;
+  margin: none;
+}
+
+.brabo{
+  font-size: 1.2rem;
+}
+}

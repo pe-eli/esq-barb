@@ -1,30 +1,40 @@
 import Footer from '../../components/Footer/footer';
 import Header from '../../components/Header/header';
 import './home.modules.css';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
 
+  const navigate = useNavigate(); // 2. Criar função de navegação
+
+  function handleClick() {
+    navigate('/conheca'); // Navega para '/conheca'
+  }
+
   return (
     <>
-      <img className="foto-de-fundo" src="/Home/background-barbearia.jpg" alt="" />
-      <Header />
+      <div className="foto-de-fundo-mb"></div>
+      <div className="foto-de-fundo-pc"></div>
+      <Header/>
       <section className='esticar-home'>
         <div className="centralize">
-          <img className="title" src="./public/Home/nome.png" alt="Esquadrão Barbearia" />
+          <img className="title" src="/Home/nome.png" alt="Esquadrão Barbearia" />
           <h3 className="slogan">Cabelo na régua, confiança no topo.</h3>
-          <button className="button-cnt">Conheça nosso trabalho</button>
+          <button className="button-cnt" onClick={handleClick}>Conheça nosso trabalho</button>
         </div>
       </section>
 
       <section className='about-section'>
         <div className='apresentacao'>
-          <h2 className='idealizador'>O idealizador</h2>
-          <p className='descricao-bruno'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...
+          <h2 style={{margin: 0}}>O idealizador</h2>
+          <p className='descricao-bruno'>A ideia da Esquadrão Barbearia surgiu entre uma conversa e outra sobre estilo, 
+            atitude e propósito. Bruno Estevam queria criar um espaço onde cada cliente se sentisse parte de 
+            algo maior — um verdadeiro esquadrão. Com bom atendimento, profissionalismo e 
+            aquele papo reto, a barbearia virou referência.
           </p>
         </div>
         <figure className='picture'>
-          <img className='foto-bruno' src="./public/Sobre/bruno.webp" alt="Bruno Estevam, fundador da barbearia." />
+          <img className='foto-bruno' src="/Sobre/bruno.webp" alt="Bruno Estevam, fundador da barbearia." />
           <figcaption className='figcaption'>Bruno Estevam, fundador da Esquadrão Barbearia.</figcaption>
         </figure>
       </section>
@@ -32,33 +42,36 @@ function Home() {
       <div className='espaco-section'>
         <div className='components-espaco'>
           <h2 className="tituloBranco">Minha barbearia</h2>
-          <p className='sobre-barbearia'>Com mais de 10 anos de experiência, somos referência...</p>
+          <p className='sobre-barbearia'>Cada corte é feito com cuidado, técnica e atitude. Do clássico ao moderno, 
+          a Esquadrão é pra quem valoriza presença.</p>
           <div className='icones-descritivos'>
             <div className='cjt-icone-texto'>
               <div className='circulo'>
                 <h1 className='icone-geral'>
-                  <img className='icone' src="./public/Espaço/lamina-de-barbear.png" alt="" />
+                  <img className='icone' src="/Espaço/lamina-de-barbear.png" alt="" />
                 </h1>
               </div>
-              <h2 className='descricao-icone'>Oferecemos apenas o melhor...</h2>
+              <h2 className='descricao-icone'>Trabalhamos com as melhores ferramentas e técnicas para garantir 
+                                              resultados de alto nível.</h2>
             </div>
 
             <div className='cjt-icone-texto'>
               <div className='circulo'>
                 <h1 className='icone-geral'>
-                  <img className='icone' src="./public/Espaço/penteado.png" />
+                  <img className='icone' src="/Espaço/penteado.png" />
                 </h1>
               </div>
-              <h2 className='descricao-icone'>Com anos de experiência...</h2>
+              <h2 className='descricao-icone'>Profissionalismo, estilo e dedicação. A tradição se une à 
+                                              modernidade em cada corte.</h2>
             </div>
 
             <div className='cjt-icone-texto'>
               <div className='circulo'>
                 <h1 className='icone-geral'>
-                  <img className='icone' src="./public/Espaço/barbearia.png" />
+                  <img className='icone' src="/Espaço/barbearia.png" />
                 </h1>
               </div>
-              <h2 className='descricao-icone'>Ambiente criado para conforto...</h2>
+              <h2 className='descricao-icone'>Criamos um ambiente pensado para você relaxar e sair renovado, na vibe certa.</h2>
             </div>
           </div>
         </div>
@@ -71,11 +84,10 @@ function Home() {
           <p>Rua 50, n°65 - Vila Santa Cecília, Volta Redonda - RJ</p>
 
           <span className='span'>Horário de funcionamento:</span>
-          <p>Segunda a Sexta: 09h às 20h</p>
-          <p>Sábado: 07h às 13h</p>
+          <p>Segunda a Sábado: 07h às 20h</p>
+          <p>Domingo: Fechado</p>
 
           <span className='span'>Entre em contato:</span>
-          <p>esquadraobarbearia@email.com</p>
           <p>(24) 99861-4631</p>
         </div>
 

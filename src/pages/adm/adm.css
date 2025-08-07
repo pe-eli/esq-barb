@@ -1,5 +1,17 @@
+.wallpaper {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url('/ADM/adm.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+}
+
 .agendamentos-container {
-  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -12,16 +24,19 @@
 
 .search-box {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-.search-box input {
+.search-box input[type="date"],
+.search-box input[type="password"],
+.search-box input[type="text"] {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-right: 10px;
   width: 250px;
 }
 
@@ -33,11 +48,33 @@
   background-color: #007bff;
   color: #fff;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-box button:hover:not(:disabled) {
+  background-color: #0056b3;
 }
 
 .search-box button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* Botões de filtro rápido */
+.search-box .quick-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.search-box .quick-buttons button {
+  background-color: #6c757d;
+}
+
+.search-box .quick-buttons button:hover {
+  background-color: #5a6268;
 }
 
 .error-message {
@@ -52,7 +89,8 @@
   margin-top: 20px;
 }
 
-.results th, .results td {
+.results th,
+.results td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
@@ -61,6 +99,7 @@
 .results th {
   background-color: #f2f2f2;
 }
+
 .sucesso {
   text-align: center;
   padding: 3rem 1rem;
@@ -84,10 +123,40 @@
     transform: translateY(0);
   }
 }
+
 .results td button {
   transition: background-color 0.3s ease;
 }
 
 .results td button:hover {
   background-color: #218838;
+}
+
+/* Estilo para título da data */
+.data-titulo {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.agenda-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.dia {
+  background-color: #2d2d2d;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.agendamento-card {
+  background-color: #444;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }

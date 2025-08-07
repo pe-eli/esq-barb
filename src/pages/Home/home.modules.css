@@ -23,17 +23,23 @@ body {
   position: relative;
 }
 
-.foto-de-fundo{
+.foto-de-fundo-pc{ /*FOTO NO PC*/
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
+  background-image: url('/Home/bg.jpg');
+  background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.4;
+  opacity: 1;
   z-index: -1;
+  display: block;
+}
+
+.foto-de-fundo-mb{ /*FOTO NO MB*/
+  display: none;
 }
 
 /* -----------------------------------------TOPO: NOME, SLOGAN E BOTAO CNT---------------------------------- */
@@ -62,37 +68,38 @@ body {
 }
 
 .button-cnt{ 
-  border: 0;
-  background-color: rgba(26, 27, 32);
+  border: 1px solid white;
+  background-color: transparent;
   text-align: center;
   align-items: center;
   height: 60px;
   width: 200px;
   border-radius: 10px;
   font-size: 1rem;
+  color: white;
+  cursor: pointer;
 }
-
-.button-cnt:hover{
-  cursor:pointer;
+.button-cnt:hover{ 
+  border: 1px solid #f5d105;
+  background-color: transparent;
   text-align: center;
   align-items: center;
-  background-color: #f5d105;
-  transition: 0.4s;
-  color: black;
-  font-weight: bold;
-  height: 65px;
-  width: 210px;
-  
+  height: 60px;
+  width: 200px;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #f5d105;
+  cursor: pointer;
+  transition: 0.3s;
 }
-
 .esticar-home{
-        height: 100vh;
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        justify-content: center;
-        color: white;
-        text-align: center;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  color: white;
+  text-align: center;
 }
 
 @media(max-width: 700px){
@@ -100,13 +107,37 @@ body {
     display: flex;
     font-size: 1.2rem;
   }
-  .esticar-home{
-    background-image: url('Home/bg.png');
+  .foto-de-fundo-pc{
+    display: none;
   }
+  .foto-de-fundo-mb{
+    background-image: url('Home/bg.jpg');
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 200%;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    z-index: -1;
+    display: block;
+  }
+
   .button-cnt{
     margin-top: 8%;
     font-size: 1rem;
     font-weight: bold;
+    width: 70%;
+    cursor: pointer;
+  }
+    .button-cnt:hover{
+    margin-top: 8%;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 70%;
+    cursor: pointer;
   }
   .title{
     width: 90vw;
@@ -123,18 +154,18 @@ body {
 /* -----------------------------------------SOBRE, FOTO DO BRUNO E TEXTO---------------------------------- */
 
 .about-section {
-  min-height: 90vh; 
+  min-height: 80vh; 
   color: black;
   display: flex;
   gap: 7%;
   background-color: rgba(255, 255, 255);
   justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
 .apresentacao{
 
-  margin-top: var(--dist-home);
   display: flex;
   width: 600px;
   flex-direction: column;
@@ -142,13 +173,11 @@ body {
 }
 
 .descricao-bruno{
-
-  text-align: justify;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
-.picture{
-  margin-top: var(--dist-home);
-}
 
 .foto-bruno{
 
@@ -216,7 +245,6 @@ body {
 .sobre-barbearia{
     display: flex;
     width: 500px;
-    font-weight: bold;
     font-size: 1.25rem;
     text-align: center;
     color:white;
@@ -235,7 +263,7 @@ body {
   margin-right: 5%;
   width: 210px;              /* largura do círculo */
   height: 210px;             /* altura igual para formar círculo */
-  background: #f5d105da;
+  background: #f5d105;
   border-radius: 50%;       /* transforma em círculo */
   display: flex;
   align-items: center;      /* centraliza verticalmente */
@@ -334,22 +362,6 @@ body {
 }
 
 @media(max-width:1200px){
-
-.background-image{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.4;
-  z-index: -1; 
-}
-.foto-de-fundo{
-  display: none;
-}
 
   .onde-estamos{
     color: #000;

@@ -10,50 +10,79 @@ import {
   addDoc,
 } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { getServicosAtivos } from '../../servicos'; // Já usa a versão Firebase
+
+const formatarData = (data: string) => {
+  if (!data) return '';
+  const [ano, mes, dia] = data.split('-');
+  const dataObj = new Date(`${ano}-${mes}-${dia}T00:00:00`);
+  const diasSemana = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+  const diaSemana = diasSemana[dataObj.getDay()];
+  const diaSemanaCapitalizado = diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
+  return `${diaSemanaCapitalizado}, ${dia}/${mes}/${ano}`;
+};
 
 const Agendamento: React.FC = () => {
   const [etapa, setEtapa] = useState(1);
+  const [servicos, setServicos] = useState<{ nome: string; preco: string }[]>([]);
   const [servico, setServico] = useState<string[]>([]);
-  const [data, setData] = useState('');
+  const [data, setData] = useState(() => new Date().toISOString().split('T')[0]);
   const [hora, setHora] = useState('');
-  const [cpf, setCpf] = useState('');
+  const [telefone, setTelefone] = useState('');
   const [nome, setNome] = useState('');
   const [horariosOcupados, setHorariosOcupados] = useState<string[]>([]);
   const [carregando, setCarregando] = useState(false);
   const [sucesso, setSucesso] = useState(false);
   const navigate = useNavigate();
 
-  const servicos = ['Corte Masculino', 'Corte Feminino', 'Barba', 'Sobrancelha'];
+  const formatarTelefone = (valor: string) => {
+    const numeros = valor.replace(/\D/g, '').slice(0, 11);
+    if (numeros.length <= 10) {
+      return numeros.replace(/^(\d{2})(\d)/, '($1) $2').replace(/(\d{4})(\d)/, '$1-$2');
+    } else {
+      return numeros.replace(/^(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2');
+    }
+  };
+
+  useEffect(() => {
+    const carregarServicos = async () => {
+      const servicosAtivos = await getServicosAtivos();
+      setServicos(servicosAtivos);
+    };
+    carregarServicos();
+  }, []);
+
+  const calcularTotal = () => {
+    return servicos
+      .filter(s => servico.includes(s.nome))
+      .reduce((total, s) => {
+        const valor = parseFloat(s.preco.replace('R$', '').replace(',', '.'));
+        return total + valor;
+      }, 0)
+      .toFixed(2)
+      .replace('.', ',');
+  };
 
   const gerarHorarios = (dataSelecionada: string): string[] => {
     const horarios: string[] = [];
     const agora = new Date();
-
     for (let h = 7; h < 18; h++) {
       for (const m of [0, 30]) {
         const horaStr = `${h.toString().padStart(2, '0')}:${m === 0 ? '00' : '30'}`;
         const dataHoraStr = `${dataSelecionada}T${horaStr}:00`;
         const dataHora = new Date(dataHoraStr);
-
         if (dataHora.getTime() > agora.getTime()) {
           horarios.push(horaStr);
         }
       }
     }
-
-    return horarios.sort((a, b) => {
-      const [h1, m1] = a.split(':').map(Number);
-      const [h2, m2] = b.split(':').map(Number);
-      return h1 !== h2 ? h1 - h2 : m1 - m2;
-    });
+    return horarios;
   };
 
   const todosHorarios = gerarHorarios(data);
 
   useEffect(() => {
-    if (etapa === 3 && data) {
-      buscarHorarios();
-    }
+    if (etapa === 3 && data) buscarHorarios();
   }, [etapa, data]);
 
   const buscarHorarios = async () => {
@@ -62,7 +91,7 @@ const Agendamento: React.FC = () => {
       const agendamentoRef = collection(db, 'agendamentos');
       const q = query(agendamentoRef, where('data', '==', data));
       const snapshot = await getDocs(q);
-      const ocupados = snapshot.docs.map((doc) => doc.data().hora);
+      const ocupados = snapshot.docs.map(doc => doc.data().hora);
       setHorariosOcupados(ocupados);
     } catch (error) {
       console.error('Erro ao buscar horários:', error);
@@ -72,20 +101,15 @@ const Agendamento: React.FC = () => {
   };
 
   const confirmarAgendamento = async () => {
-    if (!servico || !data || !hora || !cpf || !nome) {
+    if (!servico || !data || !hora || !telefone || !nome) {
       alert('Preencha todos os campos.');
       return;
     }
 
     try {
       const agendamentoRef = collection(db, 'agendamentos');
-      const q = query(
-        agendamentoRef,
-        where('data', '==', data),
-        where('hora', '==', hora)
-      );
+      const q = query(agendamentoRef, where('data', '==', data), where('hora', '==', hora));
       const snapshot = await getDocs(q);
-
       if (!snapshot.empty) {
         alert('Horário já agendado. Escolha outro.');
         return;
@@ -95,17 +119,14 @@ const Agendamento: React.FC = () => {
         servico,
         data,
         hora,
-        cpf,
+        telefone,
         nome,
         criadoEm: new Date(),
       });
 
       setSucesso(true);
       resetar();
-
-      setTimeout(() => {
-        navigate('/home');
-      }, 3000);
+      setTimeout(() => navigate('/home'), 5000);
     } catch (error) {
       console.error('Erro ao confirmar agendamento:', error);
       alert('Erro ao confirmar. Tente novamente.');
@@ -115,19 +136,24 @@ const Agendamento: React.FC = () => {
   const resetar = () => {
     setEtapa(1);
     setServico([]);
-    setData('');
+    setData(new Date().toISOString().split('T')[0]);
     setHora('');
-    setCpf('');
+    setTelefone('');
     setNome('');
     setHorariosOcupados([]);
   };
+
+  // ... (continua com seu JSX sem mudanças)
+
+
 
   if (sucesso) {
     return (
       <>
         <Header />
         <div className="agendamento">
-          <div className="agendamento-container sucesso">
+          <div style={{display: 'flex', flexDirection: 'column'}}
+               className="agendamento-container sucesso">
             <div className="icone-check">✅</div>
             <h2>Agendamento realizado com sucesso!</h2>
             <p>Você será redirecionado para a página inicial.</p>
@@ -136,58 +162,99 @@ const Agendamento: React.FC = () => {
       </>
     );
   }
-
-  return (
-    <>
-      <Header />
-      <div className='agendamento'>
-        <div className="agendamento-container">
-          {etapa === 1 && (
-            <div className="etapa">
-              <h2>Escolha o serviço desejado:</h2>
-              <div className="opcoes" style={{ display: 'flex', flexDirection: 'column' }}>
-                {servicos.map((s) => (
-                  <button
-                    key={s}
-                    className={servico.includes(s) ? 'ativo' : 'inativo'}
-                    onClick={() => {
-                      setServico((prev) =>
-                        prev.includes(s)
-                          ? prev.filter(item => item !== s)
-                          : [...prev, s]
-                      );
-                    }}
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-              <div className="botoes">
-                <button disabled={servico.length === 0} onClick={() => setEtapa(2)}>Próximo</button>
-              </div>
+          return (
+            <>
+              <div className='agendamento'>
+                <Header/>
+                <div className="agendamento-container">
+                  {etapa === 1 && (
+          <div className="etapa">
+            <h2 style={{fontSize: '1.5rem'}}>Escolha o serviço desejado:</h2>
+            <div className="opcoes" style={{ display: 'flex', flexDirection: 'column' }}>
+              {servicos.map(({ nome, preco }) => (
+                <button
+                  key={nome}
+                  className={servico.includes(nome) ? 'ativo' : 'inativo'}
+                  onClick={() => {
+                    setServico((prev) =>
+                      prev.includes(nome)
+                        ? prev.filter(item => item !== nome)
+                        : [...prev, nome]
+                    );
+                  }}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}
+                >
+                  <span>{nome}</span>
+                  <span>{preco}</span>
+                </button>
+              ))}
             </div>
-          )}
+            <p
+              style={{
+                fontWeight: 'bold',
+                display: 'flex',
+                justifyContent: 'center',
+                opacity: servico.length > 0 ? 1 : 0.4,
+                transition: 'opacity 0.5s ease',
+                margin: '0'
+              }}
+            >
+              Total: R${calcularTotal()}
+            </p>
+            <div className="botoes">
+              <button style={{width: window.innerWidth < 1000 ? '100%' : '100%', 
+                              height: '2.8rem',
+                              justifyContent: 'center',
+                              textAlign: 'center',
+                              alignItems: 'center'}}
+                      disabled={servico.length === 0} onClick={() => setEtapa(2)}>
+                Próximo
+              </button>
+            </div>
+          </div>
+        )}
+
 
           {etapa === 2 && (
   <div className="etapa">
     <h2>Escolha a data desejada:</h2>
     <input
+      style={{ backgroundColor: '#ccc', color: 'black', marginBottom:'1.5rem' }}
       type="date"
       value={data}
       min={new Date().toISOString().split('T')[0]} // impede datas passadas
       onChange={(e) => setData(e.target.value)}
     />
-    <div className="botoes">
-      <button onClick={() => setEtapa(1)}>Voltar</button>
-      <button disabled={!data} onClick={() => setEtapa(3)}>Próximo</button>
+    <div style={{width: window.innerWidth < 1000 ? '100%' : '80%'}}
+         className="botoes">
+      <button style={{width: window.innerWidth < 1000 ? '40%' : '100%', 
+                              height: '2.8rem',
+                              justifyContent: 'center',
+                              textAlign: 'center',
+                              alignItems: 'center'}}
+                      disabled={servico.length === 0} onClick={() => setEtapa(1)}>
+                Voltar
+              </button>
+       <button style={{width: window.innerWidth < 1000 ? '40%' : '100%', 
+                              height: '2.8rem',
+                              justifyContent: 'center',
+                              textAlign: 'center',
+                              alignItems: 'center'}}
+                      disabled={servico.length === 0} onClick={() => setEtapa(3)}>
+                Próximo
+              </button>
     </div>
   </div>
 )}
-
-
           {etapa === 3 && (
             <div className="etapa">
-              <h2>Escolha o horário desejado:</h2>
+              <h2 style={{width: window.innerWidth < 1000 ? '80%' : '100%', margin: '0 auto', }}>
+                Escolha o horário desejado:
+              </h2>
               {carregando ? (
                 <p>Carregando...</p>
               ) : todosHorarios.filter(h => !horariosOcupados.includes(h)).length === 0 ? (
@@ -207,9 +274,24 @@ const Agendamento: React.FC = () => {
                   )}
                 </div>
               )}
-              <div className="botoes">
-                <button onClick={() => setEtapa(2)}>Voltar</button>
-                <button disabled={!hora} onClick={() => setEtapa(4)}>Próximo</button>
+              <div style={{width: window.innerWidth < 1000 ? '100%' : '80%'}} 
+                   className="botoes">
+                <button style={{width: window.innerWidth < 1000 ? '40%' : '100%', 
+                              height: '2.8rem',
+                              justifyContent: 'center',
+                              textAlign: 'center',
+                              alignItems: 'center'}}
+                      disabled={servico.length === 0} onClick={() => setEtapa(2)}>
+                Voltar
+              </button>
+                <button style={{width: window.innerWidth < 1000 ? '40%' : '100%', 
+                              height: '2.8rem',
+                              justifyContent: 'center',
+                              textAlign: 'center',
+                              alignItems: 'center'}}
+                      disabled={servico.length === 0} onClick={() => setEtapa(4)}>
+                Próximo
+              </button>
               </div>
             </div>
           )}
@@ -217,10 +299,9 @@ const Agendamento: React.FC = () => {
           {etapa === 4 && (
             <div className="etapa">
               <h2>Confirmação:</h2>
-              <p><strong>Serviço:</strong> {servico.join(', ')}</p>
-              <p><strong>Data:</strong> {data}</p>
-              <p><strong>Hora:</strong> {hora}</p>
-
+              <p style={{margin:'0'}}><strong>Serviço:</strong> {servico.join(', ')}</p>
+              <p style={{margin:'0'}}><strong>Data:</strong> {formatarData(data)}</p>
+              <p style={{margin:'0'}}><strong>Hora:</strong> {hora}</p>
               <input
                 type="text"
                 placeholder="Digite seu nome"
@@ -230,14 +311,28 @@ const Agendamento: React.FC = () => {
 
               <input
                 type="text"
-                placeholder="Digite seu CPF"
-                value={cpf}
-                onChange={(e) => setCpf(e.target.value)}
+                placeholder="Digite seu telefone"
+                value={formatarTelefone(telefone)}
+                onChange={(e) => setTelefone(e.target.value.replace(/\D/g, '').slice(0, 11))}
               />
 
-              <div className="botoes">
-                <button onClick={() => setEtapa(3)}>Voltar</button>
-                <button disabled={!cpf || !nome} onClick={confirmarAgendamento}>
+              <div style={{width: window.innerWidth < 1000 ? '120%' : '80%'}}className="botoes">
+                 <button style={{width: window.innerWidth < 1000 ? '40%' : '100%', 
+                              height: '2.8rem',
+                              justifyContent: 'center',
+                              textAlign: 'center',
+                              alignItems: 'center',
+                              marginTop: '1.5rem'}}
+                      disabled={servico.length === 0} onClick={() => setEtapa(3)}>
+                Voltar
+              </button>
+                <button style={{width: window.innerWidth < 1000 ? '40%' : '100%', 
+                              height: '2.8rem',
+                              justifyContent: 'center',
+                              textAlign: 'center',
+                              alignItems: 'center',
+                              marginTop: '1.5rem'}}
+                              disabled={!telefone || !nome} onClick={confirmarAgendamento}>
                   Confirmar
                 </button>
               </div>

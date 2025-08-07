@@ -1,19 +1,22 @@
 .agendamento{
-  width: 100vw;
+  width: 100vw; 
   height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   background-image: url('Agende/fundo.png');
   background-position: 65% 50%;
 }
+
 .agendamento-container {
-  background-color: #333;
-  width: 30vw;
+  background-color: rgba(26, 27, 32); 
+  width: 50dvw;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0,0,0,0.05);
   font-family: sans-serif;
+  justify-content: center;
+  margin-left: 23%;
+  margin-top: 2%;
 }
 h2 {
   text-align: center;
@@ -25,56 +28,42 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-.opcoes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  justify-content: center;
   align-items: center;
 }
 
-.opcoes button {
-  width: 40%;
-  margin: 8px 0;
-  padding: 10px;
-  font-weight: bold;
-  border-radius: 8px;
-  border: 2px solid #f5d105;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
+.opcoes {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .ativo {
   background-color: #f5d105;
   color: black;
-  transition: 0.2s ease;
-  transform: translateY(-4px) scale(1.05);
+  transition: 0.5s ease-in-out;
+  transform: translateY(-4px) scale(1.001);
+  font-size: 1.2rem;
+  font-weight: 500;
+  width: 100%;
+  padding: 0.5rem 0.2rem 0.5rem 0.2rem;
+  border: none;
+  border-bottom: 1px solid white;
+  border-radius: 3px;
 }
-
 .inativo {
-  background-color: #ccc;
-  color: #333;
+  font-size: 1.2rem;
+  font-weight: 500;
+  width: 100%;
+  background-color: rgba(26, 27, 32); 
+  color: white;
+  padding: 0.5rem 0.2rem 0.5rem 0.2rem;
+  border: none;
+  border-bottom: 1px solid white;
+  border-radius: 3px;
 }
 
-.h-ativo {
-  background-color: #f5d105;
-  color: black;
-  transition: 0.2s ease;
-  transform: translateY(-4px) scale(1.05);
-}
-
-.h-inativo{
-  background-color: #ccc;
-  color: #333;
-}
-
-.opcoes button:hover {
-  background: #f5d105;
-  transition: 0.5s;
-
-}
 
 input[type="date"],
 input[type="text"] {
@@ -87,8 +76,8 @@ input[type="text"] {
 .botoes {
   display: flex;
   justify-content: center;
-  margin-top: 1.5rem;
   gap: 2rem;
+  width: 50%;
 }
 
 .botoes button {
@@ -98,7 +87,7 @@ input[type="text"] {
   color: white;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.5s;
   font-size: 1rem;
   font-weight: bold;
 }
@@ -112,13 +101,15 @@ input[type="text"] {
   cursor: not-allowed;
 }
 
-.datas-grid{
+.datas-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
-  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
   margin: 20px 0;
-
+  place-items: center; 
+  width: 80%;
 }
+
 
 .data-item{
   padding: 10px;
@@ -134,25 +125,123 @@ input[type="text"] {
 }
 
 .data-item:hover{
-  transition: 0.5s;
-  background-color: #f5d105;
+  cursor: pointer;
 }
 
+.h-ativo{
+  background-color: #f5d105;
+  transform: translateY(-4px) scale(1.01);
+  transition: 0.3s ease-in-out;
+  width: 70%;
+}
+
+.h-inativo{
+  background-color: #ccc;
+  transition: 0.1s ease-in-out;
+  width: 70%;
+}
+
+.icone-check {
+  font-size: 60px;
+  color: #4CAF50;
+  animation: popIn 3s ease;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 @media(max-width: 1000px){
   .agendamento-container{
     display: flex;
     width: 70vw;
+    margin-left: 7%;
+    margin-top: 20%;
   }
-  .opcoes button {
-  width: 80%;
-  margin: 8px 0;
-  padding: 10px;
-  font-weight: bold;
-  border-radius: 8px;
-  border: 2px solid #f5d105;
-  cursor: pointer;
+
+  .agendamento{
+  width: 100vw; 
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url('Agende/fundobrb.jpg');
+  background-position: 65% 50%;
+}
+
+.ativo {
+  background-color: #f5d105;
+  color: black;
+  transition: 0.3s ease-in-out;
+  transform: translateY(-4px) scale(1.001);
   font-size: 1rem;
-  font-weight: bold;
+  width: 100%;
+  padding: 0.5rem 0.2rem 0.5rem 0.2rem;
+  border: none;
+  border-bottom: 1px solid white;
+  border-radius: 3px;
+}
+
+.inativo {
+  font-size: 1rem;
+  width: 100%;
+  transition: 0.3s ease-in-out;
+  background-color: rgba(26, 27, 32); 
+  color: white;
+  padding: 0.5rem 0.2rem 0.5rem 0.2rem;
+  border: none;
+  border-bottom: 1px solid white;
+  border-radius: 3px;
+}
+
+.h-ativo{
+  background-color: #f5d105;
+  transform: translateY(-2px) scale(1.1);
+  width: 60%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.h-inativo{
+  background-color: #ccc;
+  width: 60%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.datas-grid {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin: 10px 0;
+  margin-bottom: 0;
+  place-items: center; 
+
+}
+
+.etapa {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.botoes{
+  width: inherit;
+  margin-top: 1rem;
 }
 }
