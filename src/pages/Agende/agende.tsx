@@ -225,7 +225,7 @@ const [data, setData] = useState(() => format(new Date(), 'yyyy-MM-dd'));
 
 
           {etapa === 2 && (
-  <div className="etapa">
+  <div className="etapa2">
     <h2>Escolha a data desejada:</h2>
     
     <DatePicker
@@ -293,7 +293,7 @@ const [data, setData] = useState(() => format(new Date(), 'yyyy-MM-dd'));
               {carregando ? (
                 <p>Carregando...</p>
               ) : todosHorarios.filter(h => !horariosOcupados.includes(h)).length === 0 ? (
-                <p>Nenhum horário disponível neste dia.</p>
+                <p style={{textAlign: 'center'}}>Nenhum horário disponível neste dia.</p>
               ) : (
                 <div className="datas-grid">
                   {todosHorarios.map((horario, idx) =>
@@ -334,12 +334,13 @@ const [data, setData] = useState(() => format(new Date(), 'yyyy-MM-dd'));
           )}
 
           {etapa === 4 && (
-            <div className="etapa">
+            <div className="etapa4">
               <h2>Confirmação:</h2>
               <p style={{margin:'0'}}><strong>Serviço:</strong> {servico.join(', ')}</p>
               <p style={{margin:'0'}}><strong>Data:</strong> {formatarData(data)}</p>
               <p style={{margin:'0'}}><strong>Hora:</strong> {hora}</p>
               <input
+                className='input-4'
                 type="text"
                 placeholder="Digite seu nome"
                 value={nome}
@@ -347,6 +348,7 @@ const [data, setData] = useState(() => format(new Date(), 'yyyy-MM-dd'));
               />
 
               <input
+                className='input-4'
                 type="text"
                 placeholder="Digite seu telefone"
                 value={formatarTelefone(telefone)}

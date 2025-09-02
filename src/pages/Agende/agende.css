@@ -31,6 +31,31 @@
   align-items: center;
   width: 70%;
 }
+
+.etapa2{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+.etapa4{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.input-4{
+  margin-top: 5%;
+  text-align: center;
+  height: 5vh;
+  background-color: transparent;
+  border-radius: 12px;
+  color: #c8a97e;
+}
 /* ===== Etapas ===== */
 .etapa h2 {
   color: #f0e0c6;
@@ -72,6 +97,12 @@ button {
 }
 
 /* Botões de navegação */
+
+.botoes{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
 .botoes button {
   background-color: #c8a97e;
   color: #2b261f;
@@ -160,7 +191,8 @@ button {
 
 /* ===== DatePicker Custom ===== */
 .custom-datepicker-wrapper {
-  width: 50%;
+  width: 75%;
+  place-self: center;
 }
 
 .custom-datepicker {
