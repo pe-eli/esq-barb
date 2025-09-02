@@ -48,3 +48,11 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.footer-marca {
+    text-align: center;   /* Centraliza o texto */
+    font-size: 0.875rem;  /* Menor tamanho */
+    color: white;         /* Mesma cor do footer */
+    margin-top: 2rem;     /* Espaço acima da marca */
+}
