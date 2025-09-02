@@ -1,0 +1,194 @@
+/* ===== Estilo Geral ===== */
+.agendamento {
+  background-color: #1e1c18; /* fundo escuro */
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #c8a97e; /* tom madeira */
+  background-image: url("/Agende/fundo.png");
+}
+
+.agendamento-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20vh;
+  background-color: #2b261f; /* container levemente mais claro */
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.etapa{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+}
+/* ===== Etapas ===== */
+.etapa h2 {
+  color: #f0e0c6;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* ===== Botões Padronizados ===== */
+button {
+  min-width: 160px;         /* largura mínima */
+  padding: 0.9rem 1.2rem;   /* altura e largura iguais em todos */
+  font-size: 1rem;          /* tamanho da fonte padronizado */
+  font-weight: 600;         /* deixa consistente */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Botões de opções */
+.opcoes button {
+  background-color: #3a2f24;
+  border: 2px solid #c8a97e;
+  color: #f0e0c6;
+  margin-bottom: 0.8rem;
+}
+
+.opcoes button.ativo {
+  background-color: #c8a97e;
+  color: #2b261f;
+  border-color: #f0e0c6;
+}
+
+.opcoes button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(200, 169, 126, 0.4);
+}
+
+/* Botões de navegação */
+.botoes button {
+  background-color: #c8a97e;
+  color: #2b261f;
+  border: none;
+  margin: 0.5rem 0;
+}
+
+.botoes button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.botoes button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200, 169, 126, 0.5);
+}
+
+
+/* ===== Inputs ===== */
+.etapa input[type="text"] {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  border: 1px solid #c8a97e;
+  background-color: #3a2f24;
+  color: #f0e0c6;
+  font-size: 1rem;
+}
+
+.etapa input[type="text"]::placeholder {
+  color: #b5885a;
+}
+
+/* ===== Grid de Horários ===== */
+.datas-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* força 3 colunas */
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.datas-grid .data-item:last-child {
+  grid-column: 2; /* força ele para a coluna do meio */
+}
+
+.data-item {
+  background-color: #3a2f24;
+  color: #f0e0c6;
+  padding: 0.6rem 0;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.data-item.h-ativo {
+  background-color: #c8a97e;
+  color: #2b261f;
+}
+
+.data-item:hover:not(.h-ativo) {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(200, 169, 126, 0.5);
+}
+
+/* -------------------------------------------------------------------------*/
+
+/* ===== Sucesso ===== */
+.sucesso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background-color: #2b261f;
+  border-radius: 15px;
+  color: #c8a97e;
+}
+
+.icone-check {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* ===== DatePicker Custom ===== */
+.custom-datepicker-wrapper {
+  width: 50%;
+}
+
+.custom-datepicker {
+  display: flex;
+  text-align: center;
+  place-self: center;
+  border-radius: 8px;
+  border: 1px solid #c8a97e;
+  background-color: #3a2f24;
+  color: #f0e0c6;
+  font-size: 1rem;
+}
+
+.react-datepicker__header {
+  background-color: #3a2f24;
+  border-bottom: 1px solid #c8a97e;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: #f0e0c6;
+}
+
+.react-datepicker__day--selected {
+  background-color: #c8a97e !important;
+  color: #2b261f !important;
+}
+
+.react-datepicker__day--disabled {
+  color: #7a6750;
+}

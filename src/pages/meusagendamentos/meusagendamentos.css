@@ -1,0 +1,106 @@
+/* ===== Container Principal ===== */
+.container-principal {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 12vh; /* espaço para não colar no header */
+  background-image: url('/Agendamento/fundo.png');
+  background-repeat: no-repeat;
+  background-size: cover; /* cobre toda a área de forma proporcional */
+  background-position: center; /* centraliza a imagem */
+  color: #f0e0c6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== Caixa do Agendamento ===== */
+.container-agendamento {
+  margin: 0 auto; /* centraliza no desktop */
+  margin-top: 5vh;
+  width: 30vw;
+  padding: 2rem;
+  background-color: rgba(43, 38, 31, 0.95); /* tom já usado (#2b261f) com transparência */
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== Botão de Serviço ===== */
+.servico-botao {
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 2px solid #c8a97e;
+  background-color: #3a2f24;
+  padding: 1rem;
+  text-align: center;
+  color: #f0e0c6;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.servico-botao:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200, 169, 126, 0.4);
+}
+
+/* ===== Botão Cancelar ===== */
+.botao-cancelar {
+  width: 40%;
+  background-color: #a94444;
+  color: #f0e0c6;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.botao-cancelar:hover {
+  background-color: #c85050;
+  transform: translateY(-2px);
+}
+
+/* ===== Inputs + Botões ===== */
+.input-botao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input-botao button {
+  width: 60%;
+  border: none;
+  border-radius: 8px;
+  height: 2.8rem;
+  margin-top: 2%;
+  background-color: #c8a97e;
+  color: #2b261f;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.input-botao button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200, 169, 126, 0.5);
+}
+
+/* ===== Responsividade ===== */
+@media(max-width: 1000px) {
+  .container-agendamento {
+    width: 85vw;
+    margin-top: 6vh;
+    padding: 1.5rem;
+  }
+
+  .botao-cancelar {
+    width: 60%;
+  }
+
+  .input-botao button {
+    width: 80%;
+  }
+}

@@ -1,0 +1,191 @@
+.wallpaper {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url('/ADM/fundo.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  align-items: center;
+}
+.ger-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  margin-top: 15vh;
+  padding: 2rem;
+  background-color: #2b261ff0;
+  border-radius: 20px;
+  color: #f0e0c6;
+}
+.ger-serv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 15rem;
+  color: #f0e0c6;
+  border: 2px solid #c8a97e;
+  font-weight: bold;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background-color: #3a2f24;
+}
+
+.ger-serv:hover{
+  background-color: #c8a97e;
+  color: #2b261f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200, 169, 126, 0.4);
+}
+.search-box button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 3rem;
+  color: #f0e0c6;
+  border: 2px solid #c8a97e;
+  font-weight: bold;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background-color: #3a2f24;
+}
+.search-box button:hover{
+  background-color: #c8a97e;
+  color: #2b261f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200, 169, 126, 0.4);
+}
+.search-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2rem;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.search-box input[type="date"],
+.search-box input[type="password"],
+.search-box input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 250px;
+}
+
+.search-box button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Botões de filtro rápido */
+.search-box .quick-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.search-box .quick-buttons button {
+  background-color: #6c757d;
+}
+
+.search-box .quick-buttons button:hover {
+  background-color: #5a6268;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.results table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.results th,
+.results td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.results th {
+  background-color: #f2f2f2;
+}
+
+.sucesso {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: white;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.icone-check {
+  font-size: 5rem;
+  color: #4caf50;
+  margin-bottom: 1rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.results td button {
+  transition: background-color 0.3s ease;
+}
+
+.results td button:hover {
+  background-color: #218838;
+}
+
+/* Estilo para título da data */
+.data-titulo {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.agenda-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.dia {
+  background-color: #2d2d2d;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.agendamento-card {
+  background-color: #444;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}

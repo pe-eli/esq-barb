@@ -1,0 +1,350 @@
+
+
+/* -----------------------------------------PRINCIPAL---------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Girassol&display=swap');
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --dist-home: 10%
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.foto-de-fundo-pc{ /*FOTO NO PC*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/Home/fundo.png');
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.3;
+  z-index: -1;
+  display: block;
+}
+
+
+/* -----------------------------------------TOPO: NOME, SLOGAN E BOTAO CNT---------------------------------- */
+.centralize{
+  margin-top: 10%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.nome{
+  font-family: 'Girassol', 'serif';
+  font-size: 4rem;
+  letter-spacing: 1px;
+}
+
+
+.button-cnt{ 
+  place-self: center;
+  border: 2px solid #d8bda3ff;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 60px;
+  width: 300px;
+  padding: 0.1rem 1.2rem 0.1rem 1.2rem;
+  font-size: 1.2rem;
+  margin-top: 8vh;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.button-cnt:hover{ 
+  background-color: transparent;
+  color: #d8bda3ff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.esticar-home{
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+@media(max-width: 600px){
+  .foto-de-fundo-pc{
+    display: none;
+  }
+.foto-de-fundo-mb {
+  background-image: url('/Home/fundo.png');
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;      /* Faz a imagem preencher */
+  background-position: center; /* Centraliza */
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  z-index: -1;
+  display: block;
+}
+
+.esticar-home{
+  margin-top: 15vh;
+}
+  .button-cnt{
+    margin-top: 8%;
+    font-size: 1rem;
+    padding: 1rem;
+    font-weight: bold;
+    width: 70%;
+    cursor: pointer;
+  }
+    .button-cnt:hover{
+    margin-top: 8%;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 70%;
+    cursor: pointer;
+  }
+  .title{
+    width: 0vw;
+    height: 15vh;
+  }
+  .centralize{
+    display: flex;
+    flex-direction: column;
+    margin-top: 0px;
+    margin-bottom: 40vh;
+  }
+  }
+
+/* -----------------------------------------SOBRE, FOTO DO BRUNO E TEXTO---------------------------------- */
+
+.about-section {
+  min-height: 80vh; 
+  color: black;
+  display: flex;
+  gap: 7%;
+  background-color: #f0e1d0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.apresentacao{  
+  display: flex;
+  width: 600px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.descricao-bruno{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.foto{
+  border-radius: 10px;
+  width: 40%;
+}
+
+.figcaption{
+  font-style: italic;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+@media(max-width: 600px){  
+  .about-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .apresentacao{
+  padding-top: 10%;
+  display: flex;
+  width: 80vw;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9375rem;
+}
+
+.foto{
+  border-radius: 10px;
+  width: 85vw;
+  margin-bottom: 15%;
+
+}
+  .apresentacao{
+  margin-top: 2%
+  }
+}
+
+/* -----------------------------------------SEÇÃO ESPAÇO, CONHEÇA NOSSO SALÃO E BLÁ BLÁ BLÁ---------------------------------- */
+
+/* Espaço Section */
+.espaco-section {
+  background: #1e1c18; /* fundo escuro */
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.components-espaco {
+  max-width: 1100px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Título principal */
+.tituloBranco {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #c8a97e; /* tom madeira claro sobre fundo escuro */
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+/* Texto de apresentação */
+.sobre-barbearia {
+  font-size: 1.1rem;
+  color: #b5885a; /* marrom/ameixa suave */
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+/* Container dos ícones */
+.icones-descritivos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+/* Conjunto de ícone e texto */
+.cjt-icone-texto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+}
+
+/* Círculo do ícone */
+.circulo {
+  background: #f0e1d0; /* fundo escuro igual ao geral */
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0 2rem 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.circulo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(200, 169, 126, 0.6); /* glow em tom madeira */
+}
+
+.icone {
+  width: 70px;
+  height: 70px;
+  filter: brightness(0);
+  display: flex;
+  place-self: center;
+}
+
+/* Texto dos ícones */
+.descricao-icone {
+  font-size: 1rem;
+  color: #c8a97e; /* tom madeira/café */
+  line-height: 1.5;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* -----------------------------------------SEÇÃO GOOGLE MAPS, ONDE ESTAMOS---------------------------------- */
+
+.local-section {
+    min-height: 100vh;
+    background-color: #f0e1d0;
+    color: #000;
+    display: flex;
+    gap: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.span{
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+}
+.tituloBranco {
+  color: white;
+}
+
+.onde-estamos{
+    margin-top: 2.8%;
+}
+
+.mapa{
+    width: 600px;
+    height: 500px;
+    margin-top: var(--dist-sobre);
+    border-radius: 10px;
+}
+
+@media(max-width:600px){
+  .onde-estamos{
+    color: #000;
+    margin-top: 0;
+    width: 80vw;
+}
+  .mapa{
+    width: 90vw;
+    height: 40vh;
+  }
+  .local-section {
+    background-color: rgba(255, 255, 255);
+    min-height: 120vh;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+  
+}
+
+
+
