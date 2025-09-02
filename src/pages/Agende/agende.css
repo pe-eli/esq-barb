@@ -55,6 +55,8 @@
   background-color: transparent;
   border-radius: 12px;
   color: #c8a97e;
+  border: 1px solid #c8a97e;
+  margin-top: 1rem;
 }
 /* ===== Etapas ===== */
 .etapa h2 {
@@ -99,11 +101,12 @@ button {
 /* Botões de navegação */
 
 .botoes{
-  margin-top: 1rem;
+  margin-top: 0.2rem;
   display: flex;
   flex-direction: column;
 }
 .botoes button {
+  font-size: 0.8rem;
   background-color: #c8a97e;
   color: #2b261f;
   border: none;
